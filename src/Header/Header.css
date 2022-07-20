@@ -1,0 +1,17 @@
+.headerLarge img{
+     height: 10%;
+     width: 10%;
+}
+
+.headerSmall img{
+width: 3%;
+height: 3%;
+}
+.headerSmall h1{
+     font-size: medium;
+}
+header{
+     background-color: black;
+     color: white;
+     padding: 5px;
+}
