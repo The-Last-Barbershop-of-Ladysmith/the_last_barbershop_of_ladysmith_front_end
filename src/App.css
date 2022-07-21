@@ -4,6 +4,7 @@ body{
      font-family: 'Nunito Sans', sans-serif;
      text-align: center;
      width: 100%;
+
 }
 .material-symbols-outlined {
   font-variation-settings:
@@ -20,14 +21,30 @@ display: block;
 margin: 0 auto 1em auto;
   max-width: 5%;
 }
-.table-wrapper{
-  width: 30%;
-}
+
 table{
   width: 100%;
   margin: 0;
+  table-layout:fixed;
+  font-size: 85%;
+  border-style: none;
+}
+
+table tr:nth-child(even){
+  background-color: rgba(216, 216, 216, 0.557);
+}
+
+
+.calendarDate:hover{
+  background-color: aquamarine;
 }
 .light-bg{
 height: 2000px;
 background-color: aliceblue;
 }
+
+@media only screen and (min-width: 391px) {
+  table{
+    font-size: 100%;
+  }
+  }
