@@ -1,9 +1,18 @@
 import React, {useState} from 'react';
+import { useNavigate } from "react-router-dom";
 
-const ClientNumber = ({handleSubmit}) => {
-     document.body.style = "background: black; color: white";
+const ClientNumber = () => {
+document.body.style = "background: black; color: white";
+const [clientNumber, setClientNumber] = useState(1);
+const [formData, setFormData] = useState({ numOfClients: 1 });
+const navigate = useNavigate();
 
-     const [formData, setFormData] = useState({numOfClients: 1})
+const handleSubmit = (event) => {
+  event.preventDefault();
+  setClientNumber(document.forms[0].numOfClients.value);
+  navigate("/schedule/date-selection");
+};
+     
      const handleChange = ({target}) =>{
           setFormData({
                ...formData, 

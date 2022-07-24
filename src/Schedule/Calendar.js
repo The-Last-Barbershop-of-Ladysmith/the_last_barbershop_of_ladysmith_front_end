@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-const Calendar = () => {
-  const [viewDate, setViewDate] = useState(new Date());
+const Calendar = ({
+  viewDate,
+  handleDecrease,
+  handleIncrease,
+  handleMonthSelect,
+  handleDayClick,
+  month,
+}) => {
   const [matches, setMatches] = useState(
-    window.matchMedia("(min-width: 391px)").matches
+    window.matchMedia("(min-width: 781px)").matches
   );
   const weekdays = [
     "Sunday",
@@ -40,17 +46,17 @@ const Calendar = () => {
 
   useEffect(() => {
     window
-      .matchMedia("(min-width: 391px)")
+      .matchMedia("(min-width: 781px)")
       .addEventListener("change", (e) => setMatches(e.matches));
+      
+      
   }, []);
 
-  viewDate.setDate(1);
-  const firstDay = viewDate.getDay();
-  const year = viewDate.getFullYear();
-  const month = viewDate.getMonth();
-  const monthEnd = new Date(year, month + 1, 0);
-  const calendarRows = [];
-
+viewDate.setDate(1);
+const firstDay = viewDate.getDay();
+const year = viewDate.getFullYear();
+const monthEnd = new Date(year, month + 1, 0);
+const calendarRows = [];
   for (let n = 1; n < 7; n++) {
     let row = eval(`row${n}`);
     for (let i = n * 7 - 7; i < 7 * n; i++) {
@@ -59,7 +65,16 @@ const Calendar = () => {
       if (day < 1 || day > monthEnd.getDate()) {
         element = <td></td>;
       } else {
-        element = <td className="calendarDate">{day}</td>;
+        element = (
+          <td>
+            <div
+              onClick={() => handleDayClick(day)}
+              className=" btn calendarDate"
+            >
+              {day}
+            </div>
+          </td>
+        );
       }
       row.push(element);
     }
@@ -71,18 +86,6 @@ const Calendar = () => {
     return <th>{label}</th>;
   });
 
-  const handleIncrease =() =>{
-    const d = new Date()
-    d.setMonth(month+1);
-    d.setDate(1)
-    setViewDate(d)
-  }
-    const handleDecrease = () => {
-      const d = new Date();
-      d.setMonth(month + 1);
-      d.setDate(1);
-      setViewDate(d);
-    };
   return (
     <div className="card text-center">
       <div className="card-header">Select a Day</div>
@@ -93,7 +96,7 @@ const Calendar = () => {
               <button className="btn" onClick={handleDecrease}>{`<`}</button>
             </div>
             <div className="col-6">
-              <h3 onClick={() => setViewDate(new Date())}>{monthNames[month]}</h3>
+              <h3 onClick={handleMonthSelect}>{monthNames[month]}</h3>
             </div>
             <div className="col-3">
               <button className="btn" onClick={handleIncrease}>{`>`}</button>
