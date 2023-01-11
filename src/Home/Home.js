@@ -3,8 +3,6 @@ import {Link} from 'react-router-dom'
 import './Home.css';
 
 const Home = () => {
-  document.body.style = "background: black; color: white";
-
      return (
        <div className="container" style ={{marginTop: "15px"}}>
          <h2 className='display-4'>Welcome to the Last Barbershop</h2>

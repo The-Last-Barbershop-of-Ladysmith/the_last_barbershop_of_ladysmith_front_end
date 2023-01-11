@@ -1,17 +1,24 @@
-.headerLarge img{
+header {
+     background-color: black;
+     color: rgb(161, 161, 161);
+     text-align: center;
+     padding: 5px;
+}
+
+.headerLarge {
+     text-align: center;
+}
+
+.headerLarge img {
      height: 10%;
      width: 10%;
 }
 
-.headerSmall img{
-width: 3%;
-height: 3%;
+.headerSmall img {
+     width: 20%;
+     height: auto;
 }
-.headerSmall h1{
+
+.headerSmall h1 {
      font-size: medium;
-}
-header{
-     background-color: black;
-     color: white;
-     padding: 5px;
 }

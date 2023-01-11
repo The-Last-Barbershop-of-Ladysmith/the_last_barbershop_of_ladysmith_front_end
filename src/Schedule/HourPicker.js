@@ -38,9 +38,9 @@ const HourPicker = ({ dateSelected }) => {
   return (
     <section>
       <div className="card">
-        <div className="card-header">Select a Time</div>
+        <h4 className="card-header">Select a Time</h4>
         <div className="card-body">
-          <div className="card-title">Hours available on {dateString}</div>
+          <h5 className="card-title">Hours available on {dateString}</h5>
           {list}
         </div>
       </div>
