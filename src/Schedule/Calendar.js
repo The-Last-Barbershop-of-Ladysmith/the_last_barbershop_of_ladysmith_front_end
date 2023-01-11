@@ -88,7 +88,7 @@ const calendarRows = [];
 
   return (
     <div className="card text-center">
-      <div className="card-header">Select a Day</div>
+      <h2 className="card-header">Select a Day</h2>
       <div className="card-body">
         <div className="card-title container">
           <div className="row">
