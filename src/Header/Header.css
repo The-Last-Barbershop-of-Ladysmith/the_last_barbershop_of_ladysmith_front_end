@@ -22,3 +22,7 @@ header {
 .headerSmall h1 {
      font-size: medium;
 }
+nav{
+     height: 15vh;
+     z-index: 3;
+}

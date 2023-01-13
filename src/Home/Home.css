@@ -5,3 +5,23 @@ body{
 span{
     vertical-align: bottom;
 }
+.mainScreen{
+    /* position: absolute; top: 0; left: 0; */
+    background-image: url("../Pictures/inside_barbershop.jpeg") ;
+    background-size:cover;
+    background-position: center;
+    height: 83.9vh;
+    width: 100vw;
+    
+}
+.blur{
+    background-color: rgba(0, 0, 0, 0.395);
+    height: inherit;
+}
+.welcome{
+    position: absolute; top: 0; left: 0;
+    background-color: black;
+    height: 100vh;
+    width: 100vw;
+    padding: 5%;
+}

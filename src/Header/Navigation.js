@@ -1,9 +1,10 @@
 import React from 'react';
-import logo from "./logo/logo.png";
+import logo from "../Pictures/logo.png";
+import { motion } from "framer-motion"
 
 const Navigation = () => {
     return (
-        <nav class="navbar navbar-dark navbar-expand-lg">
+        <motion.nav class="navbar navbar-dark navbar-expand-lg">
             <a class="navbar-brand" href="/">
                 <img src={logo} alt="last barbershop" />
                 <h1>The Last Barbershop</h1>
@@ -27,7 +28,7 @@ const Navigation = () => {
                     </li>
                 </ul>
             </div>
-        </nav>
+        </motion.nav>
     );
 }
 
