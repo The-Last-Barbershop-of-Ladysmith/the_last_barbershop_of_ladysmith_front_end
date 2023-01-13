@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from "./logo/logo.png";
+import logo from "../Pictures/logo.png";
+import { motion } from "framer-motion"
 
 const Navigation = () => {
     return (
@@ -27,7 +28,7 @@ const Navigation = () => {
                     </li>
                 </ul>
             </div>
-        </nav>
+        </motion.nav>
     );
 }
 
