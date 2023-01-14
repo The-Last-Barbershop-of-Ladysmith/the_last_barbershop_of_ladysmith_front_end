@@ -14,10 +14,21 @@ const Home = () => {
       animate={{
         opacity: 0, transitionEnd: { zIndex: -1 }
       }}
-      transition={{ duration: 1.5 }}
+      transition={{ duration: 2, delay:2 }}
     >
-      <img src={logo} alt="The Last Barbershop" />
-      <h2 className='display-4'>Welcome to the Last Barbershop</h2>
+      <motion.img 
+        animate={{
+          opacity: 0, transitionEnd: { zIndex: -1 }
+        }}
+        transition={{ duration: 2 }}
+        src={logo} 
+        alt="The Last Barbershop" />
+      <motion.h2 
+      animate={{
+        opacity: 0, transitionEnd: { zIndex: -1 }
+      }}
+      transition={{ duration: 2 }}
+      className='display-4'>Welcome to the Last Barbershop</motion.h2>
     </motion.div>
   )
 

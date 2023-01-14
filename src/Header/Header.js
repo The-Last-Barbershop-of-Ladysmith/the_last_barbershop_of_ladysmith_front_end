@@ -7,7 +7,7 @@ import "./Header.css";
 
 const Header = () => {
   return (
-    <header>
+    <header className="col-lg-3">
       <motion.nav class="navbar navbar-dark navbar-expand-lg mx-3">
         <a class="navbar-brand" href="/">
           <img src={logo} alt="last barbershop" />

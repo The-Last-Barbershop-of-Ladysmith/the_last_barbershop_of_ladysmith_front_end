@@ -2,7 +2,7 @@ header {
      background-color: black;
      color: rgb(161, 161, 161);
      text-align: center;
-     height: 130.75px;
+     min-height: 130.75px;
 }
 
 header img {
@@ -12,4 +12,17 @@ header img {
 
 h1 {
      font-size: medium;
+}
+
+@media only screen and (min-width: 992px) {
+     header{
+          min-height: 100vh;
+     }
+     nav{
+          flex-direction: column;
+          font-size: 20px;
+     }
+     .navbar-nav{
+          flex-direction: column!important;
+     }
 }
