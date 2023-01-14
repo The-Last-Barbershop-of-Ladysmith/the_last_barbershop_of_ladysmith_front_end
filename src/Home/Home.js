@@ -12,14 +12,16 @@ const Home = () => {
 
       <img src={logo} alt="The Last Barbershop" />
       <h2 className='display-4'>Welcome to the Last Barbershop</h2>
+      
 
     </motion.div>
   )
   const mainScreen = (
-    <div className='mainScreen'>
-      <div className='blur'>
-
-      <Link to='/schedule' className="btn btn-secondary m-5">
+    <div className='mainScreen '>
+      <div className='blur d-flex flex-column justify-content-center'>
+      <h2 className='display-3'>The Last Barbershop of Ladysmith, VA</h2>
+      <h3>Haircuts, and styles for the whole family</h3>
+      <Link to='/schedule' className=" scheduleBtn btn btn-secondary m-5 justify-self-end">
         <span className="material-symbols-outlined">calendar_month</span>
         <span> Schedule An Appointment</span>
       </Link>
