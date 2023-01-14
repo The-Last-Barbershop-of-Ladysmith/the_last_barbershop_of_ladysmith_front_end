@@ -2,27 +2,14 @@ header {
      background-color: black;
      color: rgb(161, 161, 161);
      text-align: center;
-     padding: 5px;
+     height: 130.75px;
 }
 
-.headerLarge {
-     text-align: center;
-}
-
-.headerLarge img {
-     height: 10%;
-     width: 10%;
-}
-
-.headerSmall img {
+header img {
      width: 20%;
      height: auto;
 }
 
-.headerSmall h1 {
+h1 {
      font-size: medium;
-}
-nav{
-     height: 15vh;
-     z-index: 3;
 }
