@@ -10,7 +10,6 @@ import Header from "./Header/Header";
 function App() {
   return (
     <Router>
-      <Header/>
       <Routes>
         <Route path ="*" element={<Layout/>}/>
       </Routes>

@@ -12,16 +12,23 @@ body {
     height: 100vh;
     width: 100vw;
     padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.welcome img{
+    width: 30%;
 }
 
 /* Main screen on home route with backgroud image of barbershop and a schedule button */
 .mainScreen {
-    /* position: absolute; top: 0; left: 0; */
+
     background-image: url("../Pictures/inside_barbershop.jpeg");
     background-size: cover;
     background-position: center;
-    height: auto;
-    width: 100vw;
+    height: inherit;
     height: calc(100vh - 130.75px);
 }
 
@@ -44,4 +51,19 @@ span {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+@media only screen and (min-width: 992px) {
+     
+    .mainScreen{
+        height: 100vh;
+        background-size: cover;
+    }
+    .welcome{
+        height: 100vh;
+        background-size: cover;
+    }
+    .welcome img{
+        width: 20%;
+    }
 }
