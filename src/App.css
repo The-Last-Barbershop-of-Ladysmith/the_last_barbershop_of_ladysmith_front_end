@@ -1,8 +1,36 @@
+/* Color Palette */
+.battleShipGrey {
+  background-color: #858888;
+  color: white;
+}
+
+.cadetGrey {
+  background-color: #8b99a9;
+  color: white;
+}
+
+.richBlack {
+  background-color: #161d26;
+  color: white;
+}
+
+.darkElectricBlue {
+  background-color: #5f6e7e;
+  color: white;
+}
+
+.davysGrey {
+  background-color: #56534b;
+  color: white;
+}
+/*****************/
+
 body {
   font-family: "Nunito Sans", sans-serif;
   text-align: center;
   width: 100%;
 }
+
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
 }
@@ -30,11 +58,12 @@ table tr:nth-child(even) {
   background-color: rgb(56, 56, 56);
 
   align-self: center;
- 
+
   margin-left: auto;
   margin-right: auto;
   color: white;
 }
+
 .light-bg {
   height: 2000px;
   background-color: aliceblue;
@@ -45,4 +74,3 @@ table tr:nth-child(even) {
     font-size: 100%;
   }
 }
-
