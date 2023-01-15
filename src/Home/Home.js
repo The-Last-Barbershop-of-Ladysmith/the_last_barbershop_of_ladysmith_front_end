@@ -38,7 +38,7 @@ const Home = () => {
       <div className='blur'>
         <h2 className='display-3'>The Last Barbershop of Ladysmith, VA</h2>
         <h3>Haircuts, and styles for the whole family</h3>
-        <Link to='/schedule' className=" scheduleBtn btn btn-secondary m-5 justify-self-end">
+        <Link to='/schedule' className=" scheduleBtn btn  m-5 richBlack justify-self-end">
           <span className="material-symbols-outlined">calendar_month</span>
           <span> Schedule An Appointment</span>
         </Link>
