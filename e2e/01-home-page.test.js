@@ -16,15 +16,23 @@ describe("01 - Home Page - E2E", () => {
 
   beforeAll(async () => {
     await fsPromises.mkdir("./.screenshots", { recursive: true });
-    setDefaultOptions({ timeout: 1000 });
-    browser = await puppeteer.launch();
+    setDefaultOptions({ timeout: 6000 });
+    browser = await puppeteer.launch({ args: [
+      '--no-sandbox',
+      '--headless',
+      '--disable-gpu',
+      '--window-size=1920x1080']});
   });
 
   beforeEach(async () => {
     page = await browser.newPage();
+    console.log(await page.content());
     page.on("console", onPageConsole);
-    await page.setViewport({ width: 1920, height: 1080 });
-    await page.goto(`${baseURL}/`, { waitUntil: "load" });
+    await page.goto('http://localhost:3000');
+    await page.screenshot({
+      path: ".screenshots/01-home-page.png",
+      fullPage: true,
+    });
   });
 
   afterAll(async () => {
@@ -33,9 +41,9 @@ describe("01 - Home Page - E2E", () => {
 
   describe("/", () => {
     test("The home page of the website contains navigations", async () => {
-        await page.goto(`${baseURL}/`, { waitUntil: "networkidle0" });
-  
-        const [navigation] = await page.$('nav');
+        await page.goto(`${baseURL}`, { waitUntil: "networkidle0" });
+        console.log("Test 1", await page.content());
+        const [navigation] = await page.waitForSelector('nav')
   
         if (!navigation) {
           throw new Error("Navigation Not found");

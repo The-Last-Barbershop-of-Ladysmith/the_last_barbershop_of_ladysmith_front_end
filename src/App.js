@@ -5,7 +5,6 @@ import Layout from "./Layout/Layout";
 
 
 import "./App.css";
-import Header from "./Header/Header";
 
 function App() {
   return (
