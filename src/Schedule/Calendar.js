@@ -34,15 +34,18 @@ const Calendar = ({
     "November",
     "December",
   ];
-
-  let row1 = [];
-  let row2 = [];
-  let row3 = [];
-  let row4 = [];
-  let row5 = [];
-  let row6 = [];
-
   document.body.style = "background: white; color: black";
+
+  // let row1 = [];
+  // let row2 = [];
+  // let row3 = [];
+  // let row4 = [];
+  // let row5 = [];
+  // let row6 = [];
+  const rows = {1:[], 2:[], 3:[],4:[], 5:[],6:[]}
+ 
+  console.log(rows)
+
 
   useEffect(() => {
     window
@@ -58,7 +61,8 @@ const year = viewDate.getFullYear();
 const monthEnd = new Date(year, month + 1, 0);
 const calendarRows = [];
   for (let n = 1; n < 7; n++) {
-    let row = eval(`row${n}`);
+    let row =rows[n];
+    console.log(row)
     for (let i = n * 7 - 7; i < 7 * n; i++) {
       const day = i - firstDay + 1;
       let element;
