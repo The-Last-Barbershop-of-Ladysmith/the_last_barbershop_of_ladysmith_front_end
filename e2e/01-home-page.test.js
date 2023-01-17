@@ -26,13 +26,8 @@ describe("01 - Home Page - E2E", () => {
 
   beforeEach(async () => {
     page = await browser.newPage();
-    console.log(await page.content());
     page.on("console", onPageConsole);
     await page.goto('http://localhost:3000');
-    await page.screenshot({
-      path: ".screenshots/01-home-page.png",
-      fullPage: true,
-    });
   });
 
   afterAll(async () => {
@@ -40,58 +35,19 @@ describe("01 - Home Page - E2E", () => {
   });
 
   describe("/", () => {
-    test("The home page of the website contains navigations", async () => {
+    test("The home page of the website contains navigation bar", async () => {
         await page.goto(`${baseURL}`, { waitUntil: "networkidle0" });
-        console.log("Test 1", await page.content());
-        const [navigation] = await page.waitForSelector('nav')
+        const navigation = await page.waitForSelector('nav')
   
         if (!navigation) {
           throw new Error("Navigation Not found");
         }
   
         await page.screenshot({
-          path: ".screenshots/us-01-cancel-before.png",
-          fullPage: true,
-        });
-  
-        await page.screenshot({
           path: ".screenshots/01-home-page.png",
           fullPage: true,
         });
-  
-        expect(navigation).toBe('true');
+        expect(navigation).toBeTruthy;
     });
-
-  //   test("canceling form returns to previous page", async () => {
-  //     await page.goto(`${baseURL}/dashboard`, { waitUntil: "networkidle0" });
-  //     await page.goto(`${baseURL}/reservations/new`, {
-  //       waitUntil: "networkidle0",
-  //     });
-
-  //     const [cancelButton] = await page.$x(
-  //       "//button[contains(translate(., 'ACDEFGHIJKLMNOPQRSTUVWXYZ', 'acdefghijklmnopqrstuvwxyz'), 'cancel')]"
-  //     );
-
-  //     if (!cancelButton) {
-  //       throw new Error("button containing cancel not found.");
-  //     }
-
-  //     await page.screenshot({
-  //       path: ".screenshots/us-01-cancel-before.png",
-  //       fullPage: true,
-  //     });
-
-  //     await Promise.all([
-  //       cancelButton.click(),
-  //       page.waitForNavigation({ waitUntil: "networkidle0" }),
-  //     ]);
-
-  //     await page.screenshot({
-  //       path: ".screenshots/us-01-cancel-after.png",
-  //       fullPage: true,
-  //     });
-
-  //     expect(page.url()).toContain("/dashboard");
-  //   });
   });
 });
