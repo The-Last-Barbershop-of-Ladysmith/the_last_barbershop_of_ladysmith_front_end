@@ -40,8 +40,6 @@ describe("01 - Home Page - E2E", () => {
     test("The home page contains button to schedule an appointment", async () => {
       const scheduleButton = await page.$(".scheduleBtn")
 
-      console.log(scheduleButton)
-
       if (!scheduleButton) {
         throw new Error("Schedule Appointment Button Not Found");
       }
