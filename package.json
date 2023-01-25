@@ -20,7 +20,7 @@
     "test": "npx cross-env CI=true npm run test:run",
     "test:run": "run-s test:e2e",
     "test:e2e": "run-p -l -r test:e2e:run test:start:* ",
-    "test:e2e:run": "jest  --detectOpenHandles --forceExit --colors || exit 0",
+    "test:e2e:run": "jest  --detectOpenHandles --forceExit --colors  --config ./e2e/jest.config.js || exit 0",
     "test:start:frontend": "npx cross-env NODE_ENV=test  react-scripts start ",
     "test:1": "run-p -l -r test:start:* \"test:e2e:run -- 01\"",
     "eject": "react-scripts eject"
