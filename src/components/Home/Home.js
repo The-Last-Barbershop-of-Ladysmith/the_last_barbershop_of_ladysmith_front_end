@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import logo from "../Pictures/logo.png"
+import logo from "../../Pictures/logo.png"
 import './Home.css';
 import { motion } from "framer-motion"
 

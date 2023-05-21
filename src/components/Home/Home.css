@@ -25,7 +25,7 @@ body {
 /* Main screen on home route with backgroud image of barbershop and a schedule button */
 .mainScreen {
 
-    background-image: url("../Pictures/inside_barbershop.jpeg");
+    background-image: url("../../Pictures/inside_barbershop.jpeg");
     background-size: cover;
     background-position: center;
     height: inherit;
