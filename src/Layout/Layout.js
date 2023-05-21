@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Home from "../Home/Home";
 import ClientNumber from "../Schedule/ClientNumber";
-import DateTimePicker from "../Schedule/DateTimePicker";
+import DateTimePicker from "../Schedule/Schedule";
 import "./Layout.css";
 function Layout() {
   const [clientNumber, setClientNumber] = useState(1);
@@ -12,7 +12,7 @@ function Layout() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setClientNumber(formData.numOfClients);
-    navigate("/schedule/date-selection");
+    navigate(`/schedule/${clientNumber}/date-selection`);
   };
   const handleChange = ({target}) =>{
     setFormData({

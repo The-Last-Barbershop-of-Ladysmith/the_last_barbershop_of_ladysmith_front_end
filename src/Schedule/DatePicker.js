@@ -36,41 +36,34 @@ const Calendar = ({
   ];
   document.body.style = "background: white; color: black";
 
-  // let row1 = [];
-  // let row2 = [];
-  // let row3 = [];
-  // let row4 = [];
-  // let row5 = [];
-  // let row6 = [];
-  const rows = {1:[], 2:[], 3:[],4:[], 5:[],6:[]}
- 
-  console.log(rows)
-
+  const calendarWeekDates = { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
 
   useEffect(() => {
     window
       .matchMedia("(min-width: 781px)")
       .addEventListener("change", (e) => setMatches(e.matches));
-      
-      
   }, []);
 
-viewDate.setDate(1);
-const firstDay = viewDate.getDay();
-const year = viewDate.getFullYear();
-const monthEnd = new Date(year, month + 1, 0);
-const calendarRows = [];
-  for (let n = 1; n < 7; n++) {
-    let row =rows[n];
-    console.log(row)
-    for (let i = n * 7 - 7; i < 7 * n; i++) {
+  viewDate.setDate(1);
+  const firstDay = viewDate.getDay();
+  const year = viewDate.getFullYear();
+  const monthEnd = new Date(year, month + 1, 0);
+  
+  // Gather table data with each calendar day for the month
+  Object.keys(calendarWeekDates).forEach((weekNum) => {
+    const week = calendarWeekDates[weekNum];
+    const endOfWeek = weekNum * 7;
+    // Loop through the week to get the day number
+    for (let i = endOfWeek - 7; i < endOfWeek; i++) {
       const day = i - firstDay + 1;
-      let element;
+      let tableData;
+      // If the day number is less than zero or greather than the end of the month, retrun empty cell
       if (day < 1 || day > monthEnd.getDate()) {
-        element = <td></td>;
+        tableData = <td key={day}></td>;
       } else {
-        element = (
-          <td>
+        // else return cell with the day number
+        tableData = (
+          <td key={day}>
             <div
               onClick={() => handleDayClick(day)}
               className=" btn calendarDate"
@@ -80,14 +73,14 @@ const calendarRows = [];
           </td>
         );
       }
-      row.push(element);
+      week.push(tableData);
     }
-    calendarRows.push(<tr key={n}>{row}</tr>);
-  }
+    calendarWeekDates[weekNum] = week
+  });
 
   const tableHeadings = weekdays.map((day) => {
     const label = matches ? day : day[0];
-    return <th>{label}</th>;
+    return <th key={label}>{label}</th>;
   });
 
   return (
@@ -111,7 +104,9 @@ const calendarRows = [];
           <thead>
             <tr>{tableHeadings}</tr>
           </thead>
-          <tbody>{calendarRows}</tbody>
+          <tbody>
+            {Object.values(calendarWeekDates).map((week, i) => <tr key={i}>{week}</tr> )}
+          </tbody>
         </table>
       </div>
     </div>

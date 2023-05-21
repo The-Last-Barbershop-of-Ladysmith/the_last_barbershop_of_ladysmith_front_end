@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import Calendar from './Calendar';
-import HourPicker from './HourPicker';
+import DatePicker from './DatePicker';
+import TimePicker from './TimePicker';
 
 const DateTimePicker = () => {
      const [viewDate, setViewDate] = useState(new Date());
@@ -38,7 +38,7 @@ const DateTimePicker = () => {
        }
      return (
        <>
-         <Calendar
+         <DatePicker
            viewDate={viewDate}
            handleDecrease={handleDecrease}
            handleIncrease={handleIncrease}
@@ -46,7 +46,7 @@ const DateTimePicker = () => {
            handleDayClick={handleDayClick}
            month={month}
          />
-         {hoursActive?  <HourPicker dateSelected={dateSelected}/>: null}
+         {hoursActive?  <TimePicker dateSelected={dateSelected}/>: null}
        </>
      );
 }
