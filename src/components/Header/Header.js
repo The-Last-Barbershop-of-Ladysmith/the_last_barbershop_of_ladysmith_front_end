@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../Pictures/logo.png";
+import logo from "../../Pictures/logo.png";
 import { motion } from "framer-motion"
 
 import "./Header.css";

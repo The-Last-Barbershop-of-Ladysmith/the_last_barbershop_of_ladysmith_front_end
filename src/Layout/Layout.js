@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Header from "../Header/Header";
+import Header from "../components/Header/Header";
 import Home from "../Home/Home";
-import ClientNumber from "../Schedule/ClientNumber";
-import DateTimePicker from "../Schedule/Schedule";
+import ClientNumber from "../components/Schedule/ClientNumber";
+import DateTimePicker from "../components/Schedule/Schedule";
 import "./Layout.css";
 function Layout() {
   const [clientNumber, setClientNumber] = useState(1);
