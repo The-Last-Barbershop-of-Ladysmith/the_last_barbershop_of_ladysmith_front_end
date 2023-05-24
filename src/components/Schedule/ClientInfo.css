@@ -1,0 +1,25 @@
+.clientDetails{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2em;
+}
+
+.break{
+    flex-basis: 100%;
+}
+
+.clientInfoForm h3{
+    flex-basis: 100%;
+    margin-bottom: 2em;
+}
+
+.clientInfoForm input{
+    flex-basis: 50%;
+    text-align: left;
+}
+
+.clientInfoForm label{
+    flex-basis: 25%;
+    text-align: left;
+}

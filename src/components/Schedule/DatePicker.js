@@ -48,7 +48,7 @@ const Calendar = ({
   const firstDay = viewDate.getDay();
   const year = viewDate.getFullYear();
   const monthEnd = new Date(year, month + 1, 0);
-  
+
   // Gather table data with each calendar day for the month
   Object.keys(calendarWeekDates).forEach((weekNum) => {
     const week = calendarWeekDates[weekNum];
@@ -75,17 +75,20 @@ const Calendar = ({
       }
       week.push(tableData);
     }
-    calendarWeekDates[weekNum] = week
+    calendarWeekDates[weekNum] = week;
   });
 
   const tableHeadings = weekdays.map((day) => {
-    const label = matches ? day : day[0];
-    return <th key={label}>{label}</th>;
+    const label = matches ? day.slice(0,3) : day[0];
+    return <th key={day}>{label}</th>;
   });
 
   return (
-    <div className="card text-center">
-      <h2 className="card-header">Select a Day</h2>
+    <div className="card calendarCard text-center col-lg-8">
+      <h3 className="card-header">
+        <span class="material-symbols-outlined">today</span>
+        <span>  Select Date</span>
+      </h3>
       <div className="card-body">
         <div className="card-title container">
           <div className="row">
@@ -93,19 +96,21 @@ const Calendar = ({
               <button className="btn" onClick={handleDecrease}>{`<`}</button>
             </div>
             <div className="col-6">
-              <h3 onClick={handleMonthSelect}>{monthNames[month]}</h3>
+              <h4 onClick={handleMonthSelect}>{monthNames[month]}</h4>
             </div>
             <div className="col-3">
               <button className="btn" onClick={handleIncrease}>{`>`}</button>
             </div>
           </div>
         </div>
-        <table className="table  ">
+        <table className="table">
           <thead>
             <tr>{tableHeadings}</tr>
           </thead>
           <tbody>
-            {Object.values(calendarWeekDates).map((week, i) => <tr key={i}>{week}</tr> )}
+            {Object.values(calendarWeekDates).map((week, i) => (
+              <tr key={i}>{week}</tr>
+            ))}
           </tbody>
         </table>
       </div>

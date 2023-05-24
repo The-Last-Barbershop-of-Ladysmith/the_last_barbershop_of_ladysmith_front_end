@@ -1,6 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom"
-const HourPicker = ({ dateSelected }) => {
+const HourPicker = ({ dateSelected, handleTimeSelect }) => {
   const monToFri = [];
 
   for (let i = 10; i < 17; i++) {
@@ -24,25 +23,28 @@ const HourPicker = ({ dateSelected }) => {
   }
 
   const daySelected = dateSelected.getDay();
-  const dateString = `${
-    dateSelected.getMonth() + 1
-  }/${dateSelected.getDate()}/${dateSelected.getFullYear()}`;
+
   const list = shopHours[daySelected].map((hour) => {
     return (
-      <Link to="" className="container btn m-2">
+      <div
+        className=" btn col-5 m-2"
+        id="appointment_time"
+        data-time-value={hour}
+        onClick={handleTimeSelect}
+      >
         {hour}
-      </Link>
+      </div>
     );
   });
   console.log(dateSelected);
   return (
-    <section>
-      <div className="card">
-        <h4 className="card-header">Select a Time</h4>
-        <div className="card-body">
-          <h5 className="card-title">Hours available on {dateString}</h5>
-          {list}
-        </div>
+    <section className="col-lg-4">
+      <div className="card timeCard">
+        <h3 className="card-header">
+          <span class="material-symbols-outlined">schedule</span>
+          <span> Select Time</span>
+        </h3>
+        <div className="card-body">{list}</div>
       </div>
     </section>
   );

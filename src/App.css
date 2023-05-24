@@ -35,13 +35,7 @@ body {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
 }
 
-input[type="number"] {
-  display: block;
-  margin: 0 auto 1em auto;
-  max-width: 5%;
-}
-
-table {
+table, td {
   width: 100%;
   margin: 0;
   table-layout: fixed;
@@ -50,9 +44,7 @@ table {
 }
 
 
-table tr:nth-child(even) {
-  background-color: rgba(216, 216, 216, 0.557);
-}
+
 
 .calendarDate:hover {
   background-color: rgb(56, 56, 56);
