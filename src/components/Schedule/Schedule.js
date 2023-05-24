@@ -1,8 +1,11 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from 'react-router-dom'
 import "./Schedule.css";
 import DatePicker from "./DatePicker";
 import TimePicker from "./TimePicker";
 import ClientInfo from "./ClientInfo";
+import Review from "./Review";
+import { createAppointment } from './Schedule.service'
 
 const DateTimePicker = () => {
   const clientNumRef = useRef(null);
@@ -17,6 +20,8 @@ const DateTimePicker = () => {
     appointment_date: "",
     appointment_time: "",
   });
+
+  const navigate = useNavigate()
 
   const handleFormChange = ({ target }) => {
     console.log(target.dataset, "i was changed")
@@ -36,12 +41,19 @@ const DateTimePicker = () => {
     nextStep.current.click();
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log(formData)
+    const appointment = await createAppointment(formData)
+    if (appointment) navigate('/')
+  }
+
   const formButton =
     stepCounter === 2 ? (
       <button
         type="Submit"
         className="btn btn-secondary m-2"
-        onClick={handleNext}
+        onClick={handleSubmit}
       >
         Submit
       </button>
@@ -172,7 +184,9 @@ const DateTimePicker = () => {
           id="review"
           role="tabpanel"
           aria-labelledby="review-tab"
-        ></div>
+        >
+        <Review formData={formData} />
+        </div>
       </form>
       {formButton}
     </div>
