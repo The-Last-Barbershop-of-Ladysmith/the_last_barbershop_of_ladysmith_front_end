@@ -1,3 +1,8 @@
+body{
+  color: white!important;
+  background-color: black!important;
+}
+
 /* Color Palette */
 .battleShipGrey {
   background-color: #858888;
