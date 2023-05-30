@@ -41,7 +41,7 @@ const HourPicker = ({ dateSelected, handleTimeSelect }) => {
     <section className="col-lg-4">
       <div className="card timeCard">
         <h3 className="card-header">
-          <span class="material-symbols-outlined">schedule</span>
+          <span className="material-symbols-outlined">schedule</span>
           <span> Select Time</span>
         </h3>
         <div className="card-body">{list}</div>

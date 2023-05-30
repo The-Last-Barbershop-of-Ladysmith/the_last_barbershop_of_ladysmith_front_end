@@ -86,7 +86,7 @@ const Calendar = ({
   return (
     <div className="card calendarCard text-center col-lg-8">
       <h3 className="card-header">
-        <span class="material-symbols-outlined">today</span>
+        <span className="material-symbols-outlined">today</span>
         <span>  Select Date</span>
       </h3>
       <div className="card-body">

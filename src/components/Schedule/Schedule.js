@@ -106,9 +106,9 @@ const DateTimePicker = () => {
 
   return (
     <div className="scheduleCard card davysGrey">
-      <ul class="nav nav-tabs progressbar" id="myTab" role="tablist">
+      <ul className="nav nav-tabs progressbar" id="myTab" role="tablist">
         <li
-          class="nav-link active"
+          className="nav-link active"
           id="client-info-tab"
           data-bs-toggle="tab"
           data-bs-target="#client-info"
@@ -123,7 +123,7 @@ const DateTimePicker = () => {
           <h2>Your Info</h2>
         </li>
         <li
-          class="nav-link"
+          className="nav-link"
           id="Date-Time-tab"
           data-bs-toggle="tab"
           data-bs-target="#Date-Time"
@@ -138,7 +138,7 @@ const DateTimePicker = () => {
           <h2>Date & Time</h2>
         </li>
         <li
-          class="nav-link"
+          className="nav-link"
           id="review-tab"
           data-bs-toggle="tab"
           data-bs-target="#review"
@@ -156,7 +156,7 @@ const DateTimePicker = () => {
 
       <form className="tab-content card-body p-0" id="myTabContent">
         <div
-          class="tab-pane fade show active"
+          className="tab-pane fade show active"
           id="client-info"
           role="tabpanel"
           aria-labelledby="client-info-tab"
@@ -164,7 +164,7 @@ const DateTimePicker = () => {
           <ClientInfo formData={formData} handleChange={handleFormChange} />
         </div>
         <div
-          class="tab-pane fade"
+          className="tab-pane fade"
           id="Date-Time"
           role="tabpanel"
           aria-labelledby="Date-Time-tab"
@@ -180,7 +180,7 @@ const DateTimePicker = () => {
           {hoursActive && <TimePicker dateSelected={dateSelected} handleTimeSelect={handleFormChange}/>}
         </div>
         <div
-          class="tab-pane fade"
+          className="tab-pane fade"
           id="review"
           role="tabpanel"
           aria-labelledby="review-tab"

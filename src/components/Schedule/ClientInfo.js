@@ -8,7 +8,7 @@ const ClientInfo = ({ formData, handleChange }) => {
       <div className="clientDetails">
 
         <h3>
-          <span class="material-symbols-outlined">person</span>
+          <span className="material-symbols-outlined">person</span>
           <span>  Enter Your Details</span>
         </h3>
       <label htmlFor="first_name">First Name
@@ -46,7 +46,7 @@ const ClientInfo = ({ formData, handleChange }) => {
           <div className="people">
 
         <h3>
-          <span class="material-symbols-outlined">group</span>
+          <span className="material-symbols-outlined">group</span>
           <span>  Enter the Number of People</span>
         </h3>
 
