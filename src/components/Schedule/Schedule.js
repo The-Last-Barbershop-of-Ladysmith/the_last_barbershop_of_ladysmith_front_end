@@ -19,17 +19,18 @@ const DateTimePicker = () => {
     people: 1,
     appointment_date: "",
     appointment_time: "",
+    mobile_number: "___-___-_____",
+    first_name: "",
+    last_name: "",
   });
 
   const navigate = useNavigate()
 
   const handleFormChange = ({ target }) => {
-    console.log(target.dataset, "i was changed")
     setFormData({
       ...formData,
       [target.id]: target.value || target.dataset.timeValue,
     });
-    console.log(formData)
   };
 
   const handleNext = (event) => {
@@ -43,7 +44,6 @@ const DateTimePicker = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(formData)
     const appointment = await createAppointment(formData)
     if (appointment) navigate('/')
   }
