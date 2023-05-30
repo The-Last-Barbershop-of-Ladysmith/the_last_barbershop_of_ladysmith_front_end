@@ -109,18 +109,18 @@ const DateTimePicker = () => {
       <ul class="nav nav-tabs progressbar" id="myTab" role="tablist">
         <li
           class="nav-link active"
-          id="people-tab"
+          id="client-info-tab"
           data-bs-toggle="tab"
-          data-bs-target="#people"
+          data-bs-target="#client-info"
           data-tab-active="false"
           type="button"
           role="tab"
-          aria-controls="people"
+          aria-controls="client-info"
           aria-selected="true"
           ref={clientNumRef}
           onClick={(e) => setStepCounter(0)}
         >
-          <h2>Number Of People</h2>
+          <h2>Your Info</h2>
         </li>
         <li
           class="nav-link"
@@ -135,7 +135,7 @@ const DateTimePicker = () => {
           ref={dateRef}
           onClick={() => setStepCounter(1)}
         >
-          <h2>Date & Time Selection</h2>
+          <h2>Date & Time</h2>
         </li>
         <li
           class="nav-link"
@@ -157,9 +157,9 @@ const DateTimePicker = () => {
       <form className="tab-content card-body p-0" id="myTabContent">
         <div
           class="tab-pane fade show active"
-          id="people"
+          id="client-info"
           role="tabpanel"
-          aria-labelledby="people-tab"
+          aria-labelledby="client-info-tab"
         >
           <ClientInfo formData={formData} handleChange={handleFormChange} />
         </div>
