@@ -1,5 +1,6 @@
 import React from "react";
 import './ClientInfo.css';
+import ReactInputMask from "react-input-mask";
 
 const ClientInfo = ({ formData, handleChange }) => {
   return (
@@ -32,7 +33,9 @@ const ClientInfo = ({ formData, handleChange }) => {
           <div className="break"></div>
           <label htmlFor="mobile_number">Mobile Number
       </label>
-        <input
+        <ReactInputMask
+          mask='999-999-9999'
+          maskChar='_'
           type="text"
           id="mobile_number"
           className="form-control my-2 text-center"
