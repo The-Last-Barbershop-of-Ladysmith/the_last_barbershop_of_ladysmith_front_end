@@ -1,6 +1,6 @@
 import React from "react";
 import './ClientInfo.css';
-import ReactInputMask from "react-input-mask";
+import ReactInputMask from "comigo-tech-react-input-mask";
 
 const ClientInfo = ({ formData, handleChange }) => {
   return (
@@ -35,7 +35,7 @@ const ClientInfo = ({ formData, handleChange }) => {
       </label>
         <ReactInputMask
           mask='999-999-9999'
-          maskChar='_'
+          maskPlaceholder='_'
           type="text"
           id="mobile_number"
           className="form-control my-2 text-center"
