@@ -1,0 +1,22 @@
+.calendarCard, .card{
+    --bs-card-bg: none!important;
+    color: white;
+}
+
+.calendarCard td .btn,
+.timeCard .btn {
+    color: white;
+}
+
+.calendarCard  .card-header, .timeCard .card-header{
+    border: none;
+    background-color: transparent;
+}
+
+.selectedDate{
+    background-color: rgb(56, 56, 56);
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}

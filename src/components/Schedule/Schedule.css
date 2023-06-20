@@ -25,10 +25,9 @@
     border: none;
 }
 
-.scheduleCard h3
- {
-    font-size: 1em;
-    letter-spacing: .2em;
+.scheduleCard h3 {
+  font-size: 1em;
+  letter-spacing: .2em;
 }
 
 .scheduleCard h3{
@@ -45,77 +44,72 @@
 .container {
     width: 100%;
   }
-  
-  .progressbar {
-    counter-reset: step;
-    border: none;
-  }
-
-  .nav{
-    --bs-nav-link-hover-color:white;
-    --bs-nav-link-color:white;
-  }
-  .progressbar .nav-link{
-    list-style: none;
-    display: inline-block;
-    width: 33.3%;
-    position: relative;
-    text-align: center;
-    cursor: pointer;
-  }
-
-  .nav-tabs .nav-link.active {
-    color: white;
-    border-color: #8b99a9;
-    background-color: transparent;
-  }
-
-  .nav-tabs{
-    --bs-nav-tabs-border-width: 0;
-  }
-
-  .progressbar li:before {
-    content: counter(step);
-    counter-increment: step;
-    width: 30px;
-    height: 30px;
-    line-height : 30px;
-    border: 1px solid #ffffff;
-    border-radius: 100%;
-    display: block;
-    text-align: center;
-    margin: 0 auto 10px auto;
-    background-color: #ffffff;
-  }
-  .progressbar li:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: .35em;
-    background-color: #ffffff;
-    top: 1.25em;
-    left: -50%;
-    z-index : -1;
-  }
-  .progressbar li:first-child:after {
-    content: none;
-  }
-  .progressbar li {
-    color: #8b99a9;
-  }
-  .progressbar li[data-tab-active='true']:before {
-    border-color: #8b99a9;
-    background-color: #8b99a9;
-  } 
-  .progressbar li[data-tab-active='true'] + li:after {
-    background-color: #8b99a9;
-  }
-
-input[type="number"] {
-  display: block;
-  margin: 0 auto 1em auto;
-  max-width: 20%;
+    
+.progressbar {
+  counter-reset: step;
+  border: none;
 }
+
+.nav{
+  --bs-nav-link-hover-color:white;
+  --bs-nav-link-color:white;
+}
+.progressbar .nav-link{
+  list-style: none;
+  display: inline-block;
+  width: 33.3%;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+
+.nav-tabs .nav-link.active {
+  color: white;
+  border-color: #8b99a9;
+  background-color: transparent;
+}
+
+.nav-tabs{
+  --bs-nav-tabs-border-width: 0;
+}
+
+.progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 30px;
+  height: 30px;
+  line-height : 30px;
+  border: 1px solid #ffffff;
+  border-radius: 100%;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  background-color: #ffffff;
+}
+.progressbar li:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: .35em;
+  background-color: #ffffff;
+  top: 1.25em;
+  left: -50%;
+  z-index : -1;
+}
+.progressbar li:first-child:after {
+  content: none;
+}
+.progressbar li {
+  color: #8b99a9;
+}
+.progressbar li[data-tab-active='true']:before {
+  border-color: #8b99a9;
+  background-color: #8b99a9;
+} 
+.progressbar li[data-tab-active='true'] + li:after {
+  background-color: #8b99a9;
+}
+
 
 .tab-pane{
     padding: 2em;
@@ -126,28 +120,25 @@ input[type="number"] {
     flex-wrap: wrap;
 }
 
-.timeCard .card-body{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.form-footer{
+  display: flex;
+  justify-content: space-between;
+  margin: 1em
+}
+
+.form-footer .btn{
+  width: 10%;
+}
+
+.selectedTime .selectedDate{
+  background-color: rgb(56, 56, 56);
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
 }
 
 
-
-.calendarCard, .card{
-    --bs-card-bg: none!important;
-    color: white;
-}
-
-.calendarCard td .btn,
-.timeCard .btn {
-    color: white;
-}
-
-.calendarCard  .card-header, .timeCard .card-header{
-    border: none;
-    background-color: transparent;
-}
 
 @media only screen and (min-width: 992px) {
   input[type="number"] {
