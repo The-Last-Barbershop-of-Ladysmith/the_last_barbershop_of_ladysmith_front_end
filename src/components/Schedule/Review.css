@@ -1,0 +1,22 @@
+.formDetails{
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    padding: 0;
+    margin: 2em 0 ;
+}
+
+.formDetails li {
+    margin-bottom: 2em;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.formDetails li > span:nth-child(odd){
+    font-weight: 800;
+    margin-right: 2em;
+}

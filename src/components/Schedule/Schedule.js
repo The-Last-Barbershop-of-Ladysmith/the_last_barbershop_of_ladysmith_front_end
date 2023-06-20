@@ -188,7 +188,10 @@ const DateTimePicker = () => {
         <Review formData={formData} />
         </div>
       </form>
+      <div className="form-footer">
+      <button type="button" className="btn btn-secondary m-2 w-5">Cancel</button>
       {formButton}
+      </div>
     </div>
   );
 };
