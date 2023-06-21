@@ -17,7 +17,7 @@ const DateTimePicker = () => {
   const month = dateSelected.getMonth();
   const [formData, setFormData] = useState({
     people: 1,
-    appointment_date: "",
+    appointment_date: new Date(),
     appointment_time: "",
     mobile_number: "___-___-_____",
     first_name: "",
@@ -27,10 +27,14 @@ const DateTimePicker = () => {
   const navigate = useNavigate()
 
   const handleFormChange = ({ target }) => {
+    console.log(target, typeof target.value)
     setFormData({
       ...formData,
-      [target.id]: target.value || target.dataset.timeValue,
+      [target.name]: target.value || target.dataset.timeValue,
     });
+    if (target.name === "appointment_date") {
+      setHoursActive(true)
+    }
   };
 
   const handleNext = (event) => {
@@ -92,16 +96,6 @@ const DateTimePicker = () => {
   const handleMonthSelect = () => {
     setHoursActive(false);
     setDateSelected(new Date());
-  };
-  const handleDayClick = (day) => {
-    setHoursActive(true);
-    const d = new Date();
-    d.setMonth(month);
-    d.setDate(day);
-    setDateSelected(d);
-    const appointment_date = formatApptDate(d)
-    setFormData({...formData, appointment_date })
-    console.log(appointment_date, formData)
   };
 
   return (
@@ -170,14 +164,13 @@ const DateTimePicker = () => {
           aria-labelledby="Date-Time-tab"
         >
           <DatePicker
-            viewDate={dateSelected}
+            formData={formData}
             handleDecrease={handleMonthPrevClick}
             handleIncrease={handleMonthNextClick}
             handleMonthSelect={handleMonthSelect}
-            handleDayClick={handleDayClick}
-            month={month}
+            handleChange={handleFormChange}
           />
-          {hoursActive && <TimePicker dateSelected={dateSelected} handleTimeSelect={handleFormChange}/>}
+          {hoursActive && <TimePicker dateSelected={dateSelected} handleTimeSelect={handleFormChange} />}
         </div>
         <div
           className="tab-pane fade"
