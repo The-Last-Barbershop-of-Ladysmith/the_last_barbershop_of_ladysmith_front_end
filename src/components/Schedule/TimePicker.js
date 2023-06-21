@@ -1,4 +1,5 @@
 import React from "react";
+import "./TimePicker.css"
 const HourPicker = ({ dateSelected, handleTimeSelect }) => {
   const monToFri = [];
 
