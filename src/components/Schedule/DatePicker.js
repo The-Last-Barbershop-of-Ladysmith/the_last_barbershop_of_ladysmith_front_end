@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
+import "./DatePicker.css"
 
 const Calendar = ({
-  viewDate,
-  handleDecrease,
-  handleIncrease,
-  handleMonthSelect,
-  handleDayClick,
-  month,
+  formData, handleDecrease, handleIncrease, handleMonthSelect, handleChange
 }) => {
+
+  const {appointment_date} = formData
+  const appointmentDate = new Date(appointment_date)
+
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 781px)").matches
   );
@@ -43,11 +43,12 @@ const Calendar = ({
       .matchMedia("(min-width: 781px)")
       .addEventListener("change", (e) => setMatches(e.matches));
   }, []);
-
-  viewDate.setDate(1);
-  const firstDay = viewDate.getDay();
-  const year = viewDate.getFullYear();
-  const monthEnd = new Date(year, month + 1, 0);
+  const startDate = new Date(formData.appointment_date)
+  console.log(startDate, 'start date', typeof startDate)
+  startDate.setDate(1);
+  const firstDay = startDate.getDay();
+  const year = startDate.getFullYear();
+  const monthEnd = new Date(year, startDate.getMonth() + 1, 0);
 
   // Gather table data with each calendar day for the month
   Object.keys(calendarWeekDates).forEach((weekNum) => {
@@ -61,15 +62,26 @@ const Calendar = ({
       if (day < 1 || day > monthEnd.getDate()) {
         tableData = <td key={day}></td>;
       } else {
+        const cellDate = new Date();
+        cellDate.setMonth(new Date(appointment_date).getMonth())
+        cellDate.setDate(day)
         // else return cell with the day number
         tableData = (
-          <td key={day}>
-            <div
-              onClick={() => handleDayClick(day)}
-              className=" btn calendarDate"
+          <td key={day} id='calendarDate'>
+            <label 
+            htmlFor={day} 
+            className={appointmentDate.getDate() === cellDate.getDate() ? 'dateLabel selectedDate': 'dateLabel'}
             >
               {day}
-            </div>
+              <input 
+                type="radio" 
+                id={day} 
+                name='appointment_date'
+                value={cellDate}
+                onChange={handleChange}
+                checked={cellDate.getDate() === appointmentDate.getDate()}
+              />
+            </label>
           </td>
         );
       }
@@ -96,7 +108,7 @@ const Calendar = ({
               <button className="btn" onClick={handleDecrease}>{`<`}</button>
             </div>
             <div className="col-6">
-              <h4 onClick={handleMonthSelect}>{monthNames[month]}</h4>
+              <h4 onClick={handleMonthSelect}>{monthNames[new Date(formData.appointment_date).getMonth()]}</h4>
             </div>
             <div className="col-3">
               <button className="btn" onClick={handleIncrease}>{`>`}</button>

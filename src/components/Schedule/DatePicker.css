@@ -15,8 +15,23 @@
 
 .selectedDate{
     background-color: rgb(56, 56, 56);
-    align-self: center;
-    margin-left: auto;
-    margin-right: auto;
     color: white;
+}
+
+.dateLabel{
+    display: block;
+    min-width: fit-content;
+    height: fit-content;
+}
+
+.dateLabel>input[type="radio"]{
+    display: none;
+}
+
+:hover:where(td:has(.dateLabel), .dateLabel){
+    cursor: pointer;
+}
+  
+td:has(.dateLabel):hover{
+border: 1px solid white;
 }
