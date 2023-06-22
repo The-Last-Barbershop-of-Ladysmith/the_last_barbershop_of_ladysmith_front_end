@@ -13,7 +13,6 @@ const DateTimePicker = () => {
   const reviewRef = useRef(null);
   const [stepCounter, setStepCounter] = useState(0);
   const [dateSelected, setDateSelected] = useState(new Date());
-  const [hoursActive, setHoursActive] = useState(false);
   const month = dateSelected.getMonth();
   const [formData, setFormData] = useState({
     people: 1,
@@ -32,9 +31,6 @@ const DateTimePicker = () => {
       ...formData,
       [target.name]: target.value || target.dataset.timeValue,
     });
-    if (target.name === "appointment_date") {
-      setHoursActive(true)
-    }
   };
 
   const handleNext = (event) => {
@@ -56,7 +52,7 @@ const DateTimePicker = () => {
     stepCounter === 2 ? (
       <button
         type="Submit"
-        className="btn btn-secondary m-2"
+        className="btn btn-secondary"
         onClick={handleSubmit}
       >
         Submit
@@ -64,7 +60,7 @@ const DateTimePicker = () => {
     ) : (
       <button
         type="button"
-        className="btn btn-secondary m-2"
+        className="btn btn-secondary "
         onClick={handleNext}
       >
         Next
@@ -79,7 +75,6 @@ const DateTimePicker = () => {
 
   const handleMonthNextClick = (e) => {
     e.preventDefault();
-    setHoursActive(false);
     const d = new Date();
     d.setMonth(month + 1);
     d.setDate(1);
@@ -87,14 +82,12 @@ const DateTimePicker = () => {
   };
   const handleMonthPrevClick = (e) => {
     e.preventDefault();
-    setHoursActive(false);
     const d = new Date();
     d.setMonth(month - 1);
     d.setDate(1);
     setDateSelected(d);
   };
   const handleMonthSelect = () => {
-    setHoursActive(false);
     setDateSelected(new Date());
   };
 
@@ -170,7 +163,7 @@ const DateTimePicker = () => {
             handleMonthSelect={handleMonthSelect}
             handleChange={handleFormChange}
           />
-          {hoursActive && <TimePicker dateSelected={dateSelected} handleTimeSelect={handleFormChange} />}
+          <TimePicker dateSelected={dateSelected} handleTimeSelect={handleFormChange} />
         </div>
         <div
           className="tab-pane fade"
@@ -182,7 +175,7 @@ const DateTimePicker = () => {
         </div>
       </form>
       <div className="form-footer">
-      <button type="button" className="btn btn-secondary m-2 w-5">Cancel</button>
+      <button type="button" className="btn btn-secondary">Cancel</button>
       {formButton}
       </div>
     </div>
