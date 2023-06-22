@@ -14,24 +14,37 @@
 }
 
 .selectedDate{
-    background-color: rgb(56, 56, 56);
+    background-color: #383838;
+    box-shadow:  .15em .15em .15em  #464646;
     color: white;
 }
 
 .dateLabel{
     display: block;
+    border-radius: 50%;
+    padding: .5em;
+    border: .05em solid transparent;
+    max-width: 50%;
     min-width: fit-content;
     height: fit-content;
+    margin: 0 25%;
 }
+
 
 .dateLabel>input[type="radio"]{
     display: none;
 }
 
-:hover:where(td:has(.dateLabel), .dateLabel){
+:hover:where(
+    .dateLabel:has(input[type=radio]:not(:disabled))
+){
     cursor: pointer;
+    border: .05em solid white;
+    box-shadow:  .15em .15em .15em  #464646;
 }
-  
-td:has(.dateLabel):hover{
-border: 1px solid white;
+
+
+
+.dateLabel:has(input[type=radio]:disabled){
+    text-decoration: line-through;
 }

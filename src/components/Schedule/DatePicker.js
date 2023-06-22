@@ -79,7 +79,7 @@ const Calendar = ({
                 name='appointment_date'
                 value={cellDate}
                 onChange={handleChange}
-                checked={cellDate.getDate() === appointmentDate.getDate()}
+                disabled={cellDate.getDate() < new Date().getDate()}
               />
             </label>
           </td>
