@@ -16,6 +16,7 @@ const ClientInfo = ({ formData, handleChange }) => {
         <input
           type="text"
           id="first_name"
+          name="first_name"
           className="form-control my-2 text-center"
           value={formData.first_name}
           onChange={handleChange}
@@ -26,6 +27,7 @@ const ClientInfo = ({ formData, handleChange }) => {
         <input
           type="text"
           id="last_name"
+          name="last_name"
           className="form-control my-2 text-center"
           value={formData.last_name}
           onChange={handleChange}
@@ -38,6 +40,7 @@ const ClientInfo = ({ formData, handleChange }) => {
           maskPlaceholder='_'
           type="text"
           id="mobile_number"
+          name="mobile_number"
           className="form-control my-2 text-center"
           value={formData.mobile_number}
           onChange={handleChange}
@@ -53,6 +56,7 @@ const ClientInfo = ({ formData, handleChange }) => {
         <input
           type="number"
           id="people"
+          name="people"
           className="form-control my-2 text-center"
           value={formData.people}
           onChange={handleChange}
