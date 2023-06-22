@@ -52,7 +52,7 @@ const DateTimePicker = () => {
     stepCounter === 2 ? (
       <button
         type="Submit"
-        className="btn btn-secondary"
+        className="btn btn-primary"
         onClick={handleSubmit}
       >
         Submit
@@ -60,7 +60,7 @@ const DateTimePicker = () => {
     ) : (
       <button
         type="button"
-        className="btn btn-secondary "
+        className="btn btn-primary "
         onClick={handleNext}
       >
         Next
