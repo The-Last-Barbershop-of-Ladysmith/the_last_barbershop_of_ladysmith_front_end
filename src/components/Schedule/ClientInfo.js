@@ -5,12 +5,12 @@ import ReactInputMask from "comigo-tech-react-input-mask";
 const ClientInfo = ({ formData, handleChange }) => {
   return (
     <div className="clientInfoForm">
-      <div className="clientDetails">
+      <fieldset className="clientDetails">
 
-        <h3>
+        <legend>
           <span className="material-symbols-outlined">person</span>
           <span>  Enter Your Details</span>
-        </h3>
+        </legend>
       <label htmlFor="first_name">First Name
       </label>
         <input
@@ -45,13 +45,13 @@ const ClientInfo = ({ formData, handleChange }) => {
           value={formData.mobile_number}
           onChange={handleChange}
           />
-          </div>
+          </fieldset>
           <div className="people">
 
-        <h3>
+        <legend>
           <span className="material-symbols-outlined">group</span>
           <span>  Enter the Number of People</span>
-        </h3>
+        </legend>
 
         <input
           type="number"

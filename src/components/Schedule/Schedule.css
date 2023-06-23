@@ -24,14 +24,12 @@
     border: none;
 }
 
-.scheduleCard h3 {
+.scheduleCard legend, h3 {
   font-size: 1em;
   letter-spacing: .2em;
+  text-shadow: 2px 2px rgb(49, 49, 49);
 }
 
-.scheduleCard h3{
-    text-shadow: 2px 2px rgb(49, 49, 49);
-}
 .scheduleCard span{
     vertical-align:middle;
 }

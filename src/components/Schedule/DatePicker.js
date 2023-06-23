@@ -96,11 +96,11 @@ const Calendar = ({
   });
 
   return (
-    <div className="card calendarCard text-center col-lg-8">
-      <h3 className="card-header">
+    <fieldset className="card calendarCard text-center col-lg-8">
+      <legend className="card-header">
         <span className="material-symbols-outlined">today</span>
         <span>  Select Date</span>
-      </h3>
+      </legend>
       <div className="card-body">
         <div className="card-title container">
           <div className="row">
@@ -126,7 +126,7 @@ const Calendar = ({
           </tbody>
         </table>
       </div>
-    </div>
+    </fieldset>
   );
 };
 export default Calendar;

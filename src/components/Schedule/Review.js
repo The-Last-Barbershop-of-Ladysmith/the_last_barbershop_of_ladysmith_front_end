@@ -25,7 +25,10 @@ const Review = ({ formData }) => {
 
   return (
     <div>
-      <h3>Review Appointment Details</h3>
+      <h3>
+      <span className="material-symbols-outlined">preview</span>
+      <span> Review Appointment Details</span>
+      </h3>
       <ul className="formDetails">
         <li>
           <span>First Name: </span>
