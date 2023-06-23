@@ -101,6 +101,7 @@
 }
 .progressbar li {
   color: #8b99a9;
+  pointer-events:'none'
 }
 .progressbar li[data-tab-active='true']:before {
   border-color: #8b99a9;
@@ -127,7 +128,7 @@
 }
 
 .form-footer .btn{
-  flex-basis: 25%;
+  flex-basis: 15%;
 }
 
 @media only screen and (min-width: 992px) {

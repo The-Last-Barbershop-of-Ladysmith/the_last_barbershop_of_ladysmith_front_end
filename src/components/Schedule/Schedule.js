@@ -25,6 +25,8 @@ const DateTimePicker = () => {
 
   const navigate = useNavigate()
 
+  if(dateRef.current)  console.log(dateRef.current.dataset)
+
   const handleFormChange = ({ target }) => {
     console.log(target, typeof target.value)
     setFormData({
@@ -39,6 +41,16 @@ const DateTimePicker = () => {
     stepRefs[stepCounter].current.dataset.tabActive = true;
     setStepCounter((prev) => prev + 1);
     const nextStep = stepRefs[stepCounter + 1];
+    nextStep.current.click();
+
+  };
+
+  const handlePrev = (event) => {
+    event.preventDefault();
+    const stepRefs = [clientNumRef, dateRef, reviewRef];
+    stepRefs[stepCounter].current.dataset.tabActive = true;
+    setStepCounter((prev) => prev - 1);
+    const nextStep = stepRefs[stepCounter - 1];
     nextStep.current.click();
   };
 
@@ -90,6 +102,9 @@ const DateTimePicker = () => {
   const handleMonthSelect = () => {
     setDateSelected(new Date());
   };
+  const disabledTab = {
+    pointerEvents:'none', //This makes it not clickable
+}
 
   return (
     <div className="scheduleCard card davysGrey">
@@ -111,6 +126,7 @@ const DateTimePicker = () => {
         </li>
         <li
           className="nav-link"
+          style={disabledTab}
           id="Date-Time-tab"
           data-bs-toggle="tab"
           data-bs-target="#Date-Time"
@@ -120,13 +136,19 @@ const DateTimePicker = () => {
           aria-controls="Date-Time"
           aria-selected="false"
           ref={dateRef}
-          onClick={() => setStepCounter(1)}
+          onClick={(e) => {
+            e.preventDefault()
+            e.target.style= null
+            setStepCounter(1)
+          }
+        }
         >
           <h2>Date & Time</h2>
         </li>
         <li
           className="nav-link"
           id="review-tab"
+          style={disabledTab}
           data-bs-toggle="tab"
           data-bs-target="#review"
           data-tab-active="false"
@@ -135,7 +157,12 @@ const DateTimePicker = () => {
           aria-controls="review"
           aria-selected="false"
           ref={reviewRef}
-          onClick={() => setStepCounter(2)}
+          onClick={(e) => {
+            e.preventDefault()
+            e.target.style= null
+            setStepCounter(1)
+          }
+        }
         >
           <h2>Review</h2>
         </li>
@@ -175,7 +202,7 @@ const DateTimePicker = () => {
         </div>
       </form>
       <div className="form-footer">
-      <button type="button" className="btn btn-secondary">Cancel</button>
+      <button type="button" className="btn btn-secondary" onClick={handlePrev}>Back</button>
       {formButton}
       </div>
     </div>
