@@ -1,10 +1,9 @@
 .scheduleCard {
   color: white;
-  margin-bottom: auto;
-  margin-top: 2em;
+  margin: auto;
   overflow-y: auto;
   width: 90%;
-  height: 90%;
+  height: 95%;
   align-self: center;
   border: none;
   box-shadow: 10px 10px 25px -5px rgb(36, 36, 36);
@@ -113,7 +112,7 @@
 
 
 .tab-pane{
-    padding: 2em;
+    padding: 1em;
 }
 
 .active#Date-Time{
@@ -124,11 +123,20 @@
 .form-footer{
   display: flex;
   justify-content: space-between;
-  margin: 1em
+  margin: .5em
 }
 
 .form-footer .btn{
   flex-basis: 15%;
+}
+
+.btn:has(.closeBtn){
+  border: none;
+  border-radius: 50%;
+}
+
+.closeBtn {
+  font-size: 1em!important;
 }
 
 @media only screen and (min-width: 992px) {

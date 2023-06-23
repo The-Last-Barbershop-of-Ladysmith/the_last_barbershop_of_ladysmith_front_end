@@ -25,8 +25,6 @@ const DateTimePicker = () => {
 
   const navigate = useNavigate()
 
-  if(dateRef.current)  console.log(dateRef.current.dataset)
-
   const handleFormChange = ({ target }) => {
     console.log(target, typeof target.value)
     setFormData({
@@ -38,7 +36,6 @@ const DateTimePicker = () => {
   const handleNext = (event) => {
     event.preventDefault();
     const stepRefs = [clientNumRef, dateRef, reviewRef];
-    stepRefs[stepCounter].current.dataset.tabActive = true;
     setStepCounter((prev) => prev + 1);
     const nextStep = stepRefs[stepCounter + 1];
     nextStep.current.click();
@@ -48,7 +45,6 @@ const DateTimePicker = () => {
   const handlePrev = (event) => {
     event.preventDefault();
     const stepRefs = [clientNumRef, dateRef, reviewRef];
-    stepRefs[stepCounter].current.dataset.tabActive = true;
     setStepCounter((prev) => prev - 1);
     const nextStep = stepRefs[stepCounter - 1];
     nextStep.current.click();
@@ -108,6 +104,13 @@ const DateTimePicker = () => {
 
   return (
     <div className="scheduleCard card davysGrey">
+      <div className="card-header d-flex justify-content-end">
+        <button className="btn btn-secondary justify-self-end">
+          <span className="material-symbols-outlined closeBtn">
+            close
+          </span>
+        </button>
+      </div>
       <ul className="nav nav-tabs progressbar" id="myTab" role="tablist">
         <li
           className="nav-link active"
@@ -160,7 +163,7 @@ const DateTimePicker = () => {
           onClick={(e) => {
             e.preventDefault()
             e.target.style= null
-            setStepCounter(1)
+            setStepCounter(2)
           }
         }
         >
