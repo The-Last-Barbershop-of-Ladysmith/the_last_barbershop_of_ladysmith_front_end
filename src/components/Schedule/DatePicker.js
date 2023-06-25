@@ -62,6 +62,7 @@ const Calendar = ({
       if (day < 1 || day > monthEnd.getDate()) {
         tableData = <td key={day}></td>;
       } else {
+        const today = new Date()
         const cellDate = new Date();
         cellDate.setMonth(new Date(appointment_date).getMonth())
         cellDate.setDate(day)
@@ -79,7 +80,7 @@ const Calendar = ({
                 name='appointment_date'
                 value={cellDate}
                 onChange={handleChange}
-                disabled={cellDate.getDate() < new Date().getDate()}
+                disabled={cellDate < today }
               />
             </label>
           </td>
