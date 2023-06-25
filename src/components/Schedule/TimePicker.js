@@ -29,7 +29,6 @@ const HourPicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
     const selectedDateTime  =  new Date()
     selectedDateTime.setHours(selectedDateTime.getHours() + 1)
     const newDateTime = new Date(formatApptDate(dateSelected) + "T" + hour)
-    console.log(dateSelected, "selected", newDateTime)
     return (
       <li className="timeOption">
         <label 
@@ -49,7 +48,7 @@ const HourPicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
       </li>
     );
   });
-  console.log(dateSelected);
+  
   return (
     <section className="col-lg-4">
       <fieldset className="card timeCard">

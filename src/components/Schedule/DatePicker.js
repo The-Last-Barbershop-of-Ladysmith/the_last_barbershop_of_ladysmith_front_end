@@ -44,7 +44,6 @@ const Calendar = ({
       .addEventListener("change", (e) => setMatches(e.matches));
   }, []);
   const startDate = new Date(formData.appointment_date)
-  console.log(startDate, 'start date', typeof startDate)
   startDate.setDate(1);
   const firstDay = startDate.getDay();
   const year = startDate.getFullYear();
