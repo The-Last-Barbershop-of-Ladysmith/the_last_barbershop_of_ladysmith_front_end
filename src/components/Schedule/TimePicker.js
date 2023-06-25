@@ -1,6 +1,6 @@
 import React from "react";
 import "./TimePicker.css"
-const HourPicker = ({ dateSelected, handleTimeSelect }) => {
+const HourPicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
   const monToFri = [];
 
   for (let i = 10; i < 17; i++) {
@@ -24,29 +24,41 @@ const HourPicker = ({ dateSelected, handleTimeSelect }) => {
   }
 
   const daySelected = dateSelected.getDay();
-
+  
   const list = shopHours[daySelected].map((hour) => {
+    const selectedDateTime  =  new Date()
+    selectedDateTime.setHours(selectedDateTime.getHours() + 1)
+    const newDateTime = new Date(formatApptDate(dateSelected) + "T" + hour)
+    console.log(dateSelected, "selected", newDateTime)
     return (
-      <div
-        className=" btn col-5 m-2"
-        id="appointment_time"
-        data-time-value={hour}
-        onClick={handleTimeSelect}
-      >
-        {hour}
-      </div>
+      <li className="timeOption">
+        <label 
+          htmlFor={hour} 
+          className={selectedDateTime === newDateTime ? 'selectedTime': null}
+        >
+          {hour}
+          <input 
+            type="radio" 
+            id={hour} 
+            name='appointment_time'
+            value={hour}
+            onChange={handleTimeSelect}
+            disabled={selectedDateTime > newDateTime}
+          />
+        </label>
+      </li>
     );
   });
   console.log(dateSelected);
   return (
     <section className="col-lg-4">
-      <div className="card timeCard">
-        <h3 className="card-header">
+      <fieldset className="card timeCard">
+        <legend className="card-header">
           <span className="material-symbols-outlined">schedule</span>
           <span> Select Time</span>
-        </h3>
-        <div className="card-body">{list}</div>
-      </div>
+        </legend>
+        <ul className="card-body">{list}</ul>
+      </fieldset>
     </section>
   );
 };
