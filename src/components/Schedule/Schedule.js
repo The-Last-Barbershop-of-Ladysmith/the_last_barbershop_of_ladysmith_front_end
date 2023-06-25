@@ -12,8 +12,6 @@ const DateTimePicker = () => {
   const dateRef = useRef(null);
   const reviewRef = useRef(null);
   const [stepCounter, setStepCounter] = useState(0);
-  const [dateSelected, setDateSelected] = useState(new Date());
-  const month = dateSelected.getMonth();
   const [formData, setFormData] = useState({
     people: 1,
     appointment_date: new Date(),
@@ -22,14 +20,14 @@ const DateTimePicker = () => {
     first_name: "",
     last_name: "",
   });
-
+  
+  const month = formData.appointment_date.getMonth();
   const navigate = useNavigate()
 
   const handleFormChange = ({ target }) => {
-    console.log(target, typeof target.value)
     setFormData({
       ...formData,
-      [target.name]: target.value || target.dataset.timeValue,
+      [target.name]: target.name==='appointment_date'? new Date(target.value) : target.value,
     });
   };
 
@@ -86,21 +84,38 @@ const DateTimePicker = () => {
     const d = new Date();
     d.setMonth(month + 1);
     d.setDate(1);
-    setDateSelected(d);
+    setFormData((prev)=> {
+      return {
+        ...prev,
+        appointment_date: d
+      }
+    });
   };
   const handleMonthPrevClick = (e) => {
     e.preventDefault();
     const d = new Date();
     d.setMonth(month - 1);
     d.setDate(1);
-    setDateSelected(d);
+    setFormData((prev)=> {
+      return {
+        ...prev,
+        appointment_date: d
+      }
+    });
   };
+
   const handleMonthSelect = () => {
-    setDateSelected(new Date());
-  };
+    setFormData(new Date());setFormData((prev)=> {
+      return {
+        ...prev,
+        appointment_date: new Date()
+      }
+    });
+  }
+
   const disabledTab = {
     pointerEvents:'none', //This makes it not clickable
-}
+  }
 
   return (
     <div className="scheduleCard card davysGrey">
@@ -193,7 +208,7 @@ const DateTimePicker = () => {
             handleMonthSelect={handleMonthSelect}
             handleChange={handleFormChange}
           />
-          <TimePicker dateSelected={dateSelected} handleTimeSelect={handleFormChange} />
+          <TimePicker dateSelected={formData.appointment_date} formatApptDate = {formatApptDate} handleTimeSelect={handleFormChange} />
         </div>
         <div
           className="tab-pane fade"
