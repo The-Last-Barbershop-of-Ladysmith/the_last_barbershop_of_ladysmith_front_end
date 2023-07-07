@@ -25,15 +25,31 @@ const DateTimePicker = () => {
   const navigate = useNavigate()
 
   const handleFormChange = ({ target }) => {
-    setFormData({
-      ...formData,
-      [target.name]: target.name==='appointment_date'? new Date(target.value) : target.value,
-    });
+    if(target.name === 'appointment_time') {
+      const {appointment_date} = formData
+      const newDate = new Date(formatApptDate(appointment_date) + "T" + target.value)
+      setFormData({
+        ...formData,
+        appointment_date: newDate,
+        appointment_time: target.value
+      })
+    } else if(target.name === 'appointment_date'){
+      setFormData({
+        ...formData, 
+        appointment_date: new Date(target.value)
+      })
+    } else{
+      setFormData({
+        ...formData,
+        [target.name]: target.value,
+      });
+    }
   };
 
   const handleNext = (event) => {
     event.preventDefault();
     const stepRefs = [clientNumRef, dateRef, reviewRef];
+    stepRefs[stepCounter].current.dataset.tabActive = true;
     setStepCounter((prev) => prev + 1);
     const nextStep = stepRefs[stepCounter + 1];
     nextStep.current.click();
@@ -50,7 +66,8 @@ const DateTimePicker = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const appointment = await createAppointment(formData)
+    const formattedDate = formatApptDate(formData.appointment_date)
+    const appointment = await createAppointment({...formData, appointment_date: formattedDate})
     if (appointment) navigate('/')
   }
 
@@ -73,7 +90,7 @@ const DateTimePicker = () => {
       </button>
     );
 
-    const formatApptDate = (date) =>{
+    function formatApptDate (date){
       const options = {year: 'numeric', month: '2-digit', day: '2-digit' }
       const [month, day, year] =  date.toLocaleDateString('en-US', options).split('/')
       return `${year}-${month}-${day}`
@@ -84,11 +101,9 @@ const DateTimePicker = () => {
     const d = new Date();
     d.setMonth(month + 1);
     d.setDate(1);
-    setFormData((prev)=> {
-      return {
-        ...prev,
+    setFormData({
+        ...formData,
         appointment_date: d
-      }
     });
   };
   const handleMonthPrevClick = (e) => {
@@ -96,21 +111,17 @@ const DateTimePicker = () => {
     const d = new Date();
     d.setMonth(month - 1);
     d.setDate(1);
-    setFormData((prev)=> {
-      return {
-        ...prev,
-        appointment_date: d
-      }
+    setFormData({
+      ...formData,
+      appointment_date: d
     });
   };
 
   const handleMonthSelect = () => {
-    setFormData(new Date());setFormData((prev)=> {
-      return {
-        ...prev,
-        appointment_date: new Date()
-      }
-    });
+    setFormData({
+      ...formData,
+      appointment_date: new Date()
+    })
   }
 
   const disabledTab = {
@@ -216,7 +227,7 @@ const DateTimePicker = () => {
           role="tabpanel"
           aria-labelledby="review-tab"
         >
-        <Review formData={formData} />
+        <Review formData={formData} formatApptDate={formatApptDate} />
         </div>
       </form>
       <div className="form-footer">
