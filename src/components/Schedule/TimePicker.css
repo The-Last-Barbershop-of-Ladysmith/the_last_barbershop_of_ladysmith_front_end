@@ -9,6 +9,7 @@
     padding: .5em;
     margin: .5em;
     border: .05em solid transparent;
+    border-radius: 15%;
 }
 
 .timeOption input{
@@ -26,8 +27,12 @@
     cursor: pointer; 
 }
 
-
-
 .timeOption label:has(input[type=radio]:disabled){
     text-decoration:line-through;
+}
+
+.selectedTime{
+    background-color: #383838;
+    box-shadow:  .15em .15em .15em  #464646;
+    color: white;
 }

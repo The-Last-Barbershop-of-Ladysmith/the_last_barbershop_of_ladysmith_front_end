@@ -26,14 +26,13 @@ const HourPicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
   const daySelected = dateSelected.getDay();
   
   const list = shopHours[daySelected].map((hour) => {
-    const selectedDateTime  =  new Date()
-    selectedDateTime.setHours(selectedDateTime.getHours() + 1)
+    const today  =  new Date()
+    today.setHours(today.getHours() + 1)
     const newDateTime = new Date(formatApptDate(dateSelected) + "T" + hour)
     return (
-      <li className="timeOption">
+      <li className={+dateSelected === +newDateTime ? ' timeOption selectedTime': 'timeOption'}>
         <label 
-          htmlFor={hour} 
-          className={selectedDateTime === newDateTime ? 'selectedTime': null}
+          htmlFor={hour}
         >
           {hour}
           <input 
@@ -42,7 +41,7 @@ const HourPicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
             name='appointment_time'
             value={hour}
             onChange={handleTimeSelect}
-            disabled={selectedDateTime > newDateTime}
+            disabled={today > newDateTime}
           />
         </label>
       </li>
