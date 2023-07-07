@@ -1,7 +1,7 @@
 import React from "react";
 import './Review.css'
 
-const Review = ({ formData }) => {
+const Review = ({ formData, formatApptDate }) => {
   const {
     first_name,
     last_name,
@@ -11,8 +11,8 @@ const Review = ({ formData }) => {
     people,
   } = formData;
 
-  const apptDateObj = new Date(appointment_date + " " + appointment_time);
-
+  const apptDateObj = new Date(formatApptDate(appointment_date) + "T" + appointment_time);
+  
   const formattedDate = apptDateObj.toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
