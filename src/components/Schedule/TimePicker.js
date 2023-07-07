@@ -1,6 +1,6 @@
 import React from "react";
 import "./TimePicker.css"
-const HourPicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
+const TimePicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
   const monToFri = [];
 
   for (let i = 10; i < 17; i++) {
@@ -30,7 +30,10 @@ const HourPicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
     today.setHours(today.getHours() + 1)
     const newDateTime = new Date(formatApptDate(dateSelected) + "T" + hour)
     return (
-      <li className={+dateSelected === +newDateTime ? ' timeOption selectedTime': 'timeOption'}>
+      <li 
+        key = {hour}
+        className={+dateSelected === +newDateTime ? ' timeOption selectedTime': 'timeOption'}
+      >
         <label 
           htmlFor={hour}
         >
@@ -61,4 +64,4 @@ const HourPicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
   );
 };
 
-export default HourPicker;
+export default TimePicker;
