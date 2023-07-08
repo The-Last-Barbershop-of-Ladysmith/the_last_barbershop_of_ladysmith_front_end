@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import './ClientInfo.css';
 import ReactInputMask from "comigo-tech-react-input-mask";
 
@@ -55,6 +55,7 @@ const ClientInfo = ({ formData, handleChange }) => {
 
         <input
           type="number"
+          min={1}
           id="people"
           name="people"
           className="form-control my-2 text-center"

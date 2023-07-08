@@ -67,8 +67,9 @@ const DateTimePicker = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const formattedDate = formatApptDate(formData.appointment_date)
-    const appointment = await createAppointment({...formData, appointment_date: formattedDate})
-    if (appointment) navigate('/')
+    const appointmentData = {...formData, appointment_date: formattedDate}
+    const appointment = await createAppointment(appointmentData)
+    if (appointment) navigate(`/appointments/${appointment.appointment_id}`)
   }
 
   const formButton =

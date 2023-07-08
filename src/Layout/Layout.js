@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Home from "../components/Home/Home";
-import Schedule from "../components/Schedule/Schedule";
+import Schedule from '../components/Appointments/Schedule/Schedule'
 import "./Layout.css";
 function Layout() {
 
@@ -14,7 +14,7 @@ function Layout() {
           <div className="blur">
             <Routes>
               <Route exact={true} path="/" element={<Home />} />
-              <Route exact={true} path={`/schedule`} element={<Schedule />} />
+              <Route exact={true} path="/appointments/schedule" element={<Schedule />} />
             </Routes>
           </div>
         </div>
