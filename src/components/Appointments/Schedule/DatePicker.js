@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./DatePicker.css"
+import FormItem from "../../Forms/FormItem";
 
 const Calendar = ({
   formData, handleDecrease, handleIncrease, handleMonthSelect, handleChange
@@ -68,20 +69,16 @@ const Calendar = ({
         // else return cell with the day number
         tableData = (
           <td key={day} id='calendarDate'>
-            <label 
-            htmlFor={day} 
-            className={appointmentDate.getDate() === cellDate.getDate() ? 'dateLabel selectedDate': 'dateLabel'}
-            >
-              {day}
-              <input 
-                type="radio" 
-                id={day} 
-                name='appointment_date'
-                value={cellDate}
-                onChange={handleChange}
-                disabled={cellDate < today }
-              />
-            </label>
+            <FormItem
+              type="radio"
+              id={day}
+              altFormClass={appointmentDate.getDate() === cellDate.getDate() ? 'dateLabel selectedDate': 'dateLabel'}
+              name="appointment_date"
+              value={cellDate}
+              onChange={handleChange}
+              otherInputOptions={{disabled: cellDate < today}}
+              label={day}
+            />
           </td>
         );
       }

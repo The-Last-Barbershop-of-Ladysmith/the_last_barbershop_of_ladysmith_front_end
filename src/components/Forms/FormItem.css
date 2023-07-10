@@ -1,0 +1,46 @@
+.formItem{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    margin: 1em 0;
+    padding: 0 1em;
+
+}
+
+.formLabel{
+    flex-basis: 25%;
+    text-align: left;
+}
+
+.formItem input{
+    border:none;
+    flex-basis: 75%;
+    padding: .5em .5em .5em 1.5em;
+    border-radius: 0.375rem;
+}
+
+input[type="number"] {
+    display: block;
+    margin: 0 auto 1em auto;
+    flex-basis: 10%;
+  }
+
+.formItem .invalidInput{
+    background: white url("../../Pictures/error.svg") no-repeat right center;
+    background-size: 1.5em;
+    background-origin: content-box;
+    border: .1em solid red;
+}
+
+.formItem .invalidInput:focus{
+    outline: #b56a72 solid .15em;
+}
+
+.formAlert{
+    margin-left: auto;
+    margin-top: .5em;
+    padding: .5em;
+}

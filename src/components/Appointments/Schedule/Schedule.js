@@ -1,17 +1,19 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import "./Schedule.css";
 import DatePicker from "./DatePicker";
 import TimePicker from "./TimePicker";
 import ClientInfo from "./ClientInfo";
 import Review from "./Review";
-import { createAppointment } from './Schedule.service'
+import { createAppointment } from "./Schedule.service";
 
 const DateTimePicker = () => {
   const clientNumRef = useRef(null);
   const dateRef = useRef(null);
   const reviewRef = useRef(null);
   const [stepCounter, setStepCounter] = useState(0);
+  const [showErrors, setShowErrors] = useState(false);
+  const errorFields = useRef([]);
   const [formData, setFormData] = useState({
     people: 1,
     appointment_date: new Date(),
@@ -20,25 +22,27 @@ const DateTimePicker = () => {
     first_name: "",
     last_name: "",
   });
-  
+
   const month = formData.appointment_date.getMonth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleFormChange = ({ target }) => {
-    if(target.name === 'appointment_time') {
-      const {appointment_date} = formData
-      const newDate = new Date(formatApptDate(appointment_date) + "T" + target.value)
+    if (target.name === "appointment_time") {
+      const { appointment_date } = formData;
+      const newDate = new Date(
+        formatApptDate(appointment_date) + "T" + target.value
+      );
       setFormData({
         ...formData,
         appointment_date: newDate,
-        appointment_time: target.value
-      })
-    } else if(target.name === 'appointment_date'){
+        appointment_time: target.value,
+      });
+    } else if (target.name === "appointment_date") {
       setFormData({
-        ...formData, 
-        appointment_date: new Date(target.value)
-      })
-    } else{
+        ...formData,
+        appointment_date: new Date(target.value),
+      });
+    } else {
       setFormData({
         ...formData,
         [target.name]: target.value,
@@ -49,11 +53,16 @@ const DateTimePicker = () => {
   const handleNext = (event) => {
     event.preventDefault();
     const stepRefs = [clientNumRef, dateRef, reviewRef];
-    stepRefs[stepCounter].current.dataset.tabActive = true;
-    setStepCounter((prev) => prev + 1);
-    const nextStep = stepRefs[stepCounter + 1];
-    nextStep.current.click();
-
+    const formValidationsByTab = [validateInforForm];
+    // formValidationsByTab[stepCounter]();
+    if (errorFields.current.length) {
+      setShowErrors(true);
+    } else {
+      stepRefs[stepCounter].current.dataset.tabActive = true;
+      setStepCounter((prev) => prev + 1);
+      const nextStep = stepRefs[stepCounter + 1];
+      nextStep.current.click();
+    }
   };
 
   const handlePrev = (event) => {
@@ -64,38 +73,42 @@ const DateTimePicker = () => {
     nextStep.current.click();
   };
 
+  const validateFirstName = () => {
+    if (!formData.first_name.length) {
+      // errorFields.current.push("first_name");
+    }
+  };
+
+  const validateInforForm = () => {
+    validateFirstName();
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const formattedDate = formatApptDate(formData.appointment_date)
-    const appointmentData = {...formData, appointment_date: formattedDate}
-    const appointment = await createAppointment(appointmentData)
-    if (appointment) navigate(`/appointments/${appointment.appointment_id}`)
-  }
+    e.preventDefault();
+    const formattedDate = formatApptDate(formData.appointment_date);
+    const appointmentData = { ...formData, appointment_date: formattedDate };
+    const appointment = await createAppointment(appointmentData);
+    if (appointment) navigate(`/appointments/${appointment.appointment_id}`);
+  };
 
   const formButton =
     stepCounter === 2 ? (
-      <button
-        type="Submit"
-        className="btn btn-primary"
-        onClick={handleSubmit}
-      >
+      <button type="Submit" className="btn btn-primary" onClick={handleSubmit}>
         Submit
       </button>
     ) : (
-      <button
-        type="button"
-        className="btn btn-primary "
-        onClick={handleNext}
-      >
+      <button type="button" className="btn btn-primary " onClick={handleNext}>
         Next
       </button>
     );
 
-    function formatApptDate (date){
-      const options = {year: 'numeric', month: '2-digit', day: '2-digit' }
-      const [month, day, year] =  date.toLocaleDateString('en-US', options).split('/')
-      return `${year}-${month}-${day}`
-    }
+  function formatApptDate(date) {
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    const [month, day, year] = date
+      .toLocaleDateString("en-US", options)
+      .split("/");
+    return `${year}-${month}-${day}`;
+  }
 
   const handleMonthNextClick = (e) => {
     e.preventDefault();
@@ -103,8 +116,8 @@ const DateTimePicker = () => {
     d.setMonth(month + 1);
     d.setDate(1);
     setFormData({
-        ...formData,
-        appointment_date: d
+      ...formData,
+      appointment_date: d,
     });
   };
   const handleMonthPrevClick = (e) => {
@@ -114,28 +127,26 @@ const DateTimePicker = () => {
     d.setDate(1);
     setFormData({
       ...formData,
-      appointment_date: d
+      appointment_date: d,
     });
   };
 
   const handleMonthSelect = () => {
     setFormData({
       ...formData,
-      appointment_date: new Date()
-    })
-  }
+      appointment_date: new Date(),
+    });
+  };
 
   const disabledTab = {
-    pointerEvents:'none', //This makes it not clickable
-  }
+    pointerEvents: "none", //This makes it not clickable
+  };
 
   return (
     <div className="scheduleCard card davysGrey">
-      <div className="card-header d-flex justify-content-end">
+      <div className="d-flex justify-content-end">
         <button className="btn btn-secondary justify-self-end">
-          <span className="material-symbols-outlined closeBtn">
-            close
-          </span>
+          <span className="material-symbols-outlined closeBtn">close</span>
         </button>
       </div>
       <ul className="nav nav-tabs progressbar" id="myTab" role="tablist">
@@ -167,11 +178,10 @@ const DateTimePicker = () => {
           aria-selected="false"
           ref={dateRef}
           onClick={(e) => {
-            e.preventDefault()
-            e.target.style= null
-            setStepCounter(1)
-          }
-        }
+            e.preventDefault();
+            e.target.style = null;
+            setStepCounter(1);
+          }}
         >
           <h2>Date & Time</h2>
         </li>
@@ -188,11 +198,10 @@ const DateTimePicker = () => {
           aria-selected="false"
           ref={reviewRef}
           onClick={(e) => {
-            e.preventDefault()
-            e.target.style= null
-            setStepCounter(2)
-          }
-        }
+            e.preventDefault();
+            e.target.style = null;
+            setStepCounter(2);
+          }}
         >
           <h2>Review</h2>
         </li>
@@ -205,7 +214,12 @@ const DateTimePicker = () => {
           role="tabpanel"
           aria-labelledby="client-info-tab"
         >
-          <ClientInfo formData={formData} handleChange={handleFormChange} />
+          <ClientInfo
+            formData={formData}
+            handleChange={handleFormChange}
+            errorFields={errorFields.current}
+            showErrors={showErrors}
+          />
         </div>
         <div
           className="tab-pane fade"
@@ -220,7 +234,11 @@ const DateTimePicker = () => {
             handleMonthSelect={handleMonthSelect}
             handleChange={handleFormChange}
           />
-          <TimePicker dateSelected={formData.appointment_date} formatApptDate = {formatApptDate} handleTimeSelect={handleFormChange} />
+          <TimePicker
+            dateSelected={formData.appointment_date}
+            formatApptDate={formatApptDate}
+            handleTimeSelect={handleFormChange}
+          />
         </div>
         <div
           className="tab-pane fade"
@@ -228,12 +246,18 @@ const DateTimePicker = () => {
           role="tabpanel"
           aria-labelledby="review-tab"
         >
-        <Review formData={formData} formatApptDate={formatApptDate} />
+          <Review formData={formData} formatApptDate={formatApptDate} />
         </div>
       </form>
       <div className="form-footer">
-      <button type="button" className="btn btn-secondary" onClick={handlePrev}>Back</button>
-      {formButton}
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={handlePrev}
+        >
+          Back
+        </button>
+        {formButton}
       </div>
     </div>
   );

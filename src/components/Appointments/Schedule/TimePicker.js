@@ -1,5 +1,6 @@
 import React from "react";
 import "./TimePicker.css"
+import FormItem from "../../Forms/FormItem";
 const TimePicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
   const monToFri = [];
 
@@ -30,37 +31,27 @@ const TimePicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
     today.setHours(today.getHours() + 1)
     const newDateTime = new Date(formatApptDate(dateSelected) + "T" + hour)
     return (
-      <li 
-        key = {hour}
-        className={+dateSelected === +newDateTime ? ' timeOption selectedTime': 'timeOption'}
-      >
-        <label 
-          htmlFor={hour}
-        >
-          {hour}
-          <input 
-            type="radio" 
-            id={hour} 
-            name='appointment_time'
-            value={hour}
-            onChange={handleTimeSelect}
-            disabled={today > newDateTime}
-          />
-        </label>
-      </li>
+        <FormItem
+          type="radio" 
+          id={hour} 
+          name='appointment_time'
+          value={hour}
+          onChange={handleTimeSelect}
+          label={hour}
+          otherInputOptions={{disabled:  today > newDateTime}}
+          altFormClass={+dateSelected === +newDateTime ? ' timeOption selectedTime': 'timeOption'}
+        />
     );
   });
   
   return (
-    <section className="col-lg-4">
-      <fieldset className="card timeCard">
+      <fieldset className="card timeCard col-lg-4">
         <legend className="card-header">
           <span className="material-symbols-outlined">schedule</span>
           <span> Select Time</span>
         </legend>
         <ul className="card-body">{list}</ul>
       </fieldset>
-    </section>
   );
 };
 

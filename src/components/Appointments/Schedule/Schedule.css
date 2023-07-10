@@ -10,12 +10,6 @@
   z-index: 1;
 }
 
-.scheduleCard> .card-header{
-    background-color: #56534b;
-    color: white;
-    border: none;
-}
-
 .scheduleCard h2{
     font-size: 1em;
 }

@@ -3,19 +3,15 @@
     color: white;
 }
 
-.calendarCard td .btn,
-.timeCard .btn {
-    color: white;
-}
-
 .calendarCard  .card-header, .timeCard .card-header{
     border: none;
     background-color: transparent;
 }
 
 .selectedDate{
-    background-color: #383838;
-    box-shadow:  .15em .15em .15em  #464646;
+    background-color: #2d2c2c;
+    border-color: #272727;
+    box-shadow:  .15em .15em .15em  #323030;
     color: white;
 }
 
@@ -24,10 +20,10 @@
     border-radius: 50%;
     padding: .5em;
     border: .05em solid transparent;
-    max-width: 50%;
-    min-width: fit-content;
-    height: fit-content;
-    margin: 0 25%;
+    width: fit-content;
+    margin: auto;
+    padding: .25em 0.5em;
+    min-width: 50%;
 }
 
 
@@ -40,11 +36,15 @@
 ){
     cursor: pointer;
     border: .05em solid white;
-    box-shadow:  .15em .15em .15em  #464646;
+    box-shadow:  .15em .15em .15em  #3b3838;
 }
-
-
 
 .dateLabel:has(input[type=radio]:disabled){
     text-decoration: line-through;
+}
+
+@media only screen and (min-width: 992px) {
+    .dateLabel {
+        padding: .5em;
+    }
 }

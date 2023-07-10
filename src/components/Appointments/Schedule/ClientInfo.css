@@ -1,36 +1,9 @@
-.clientDetails{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 2em;
+#people label[for="people"]> span:first-of-type{
+    display: none;
 }
 
-.break{
-    flex-basis: 100%;
-}
-
-.clientInfoForm h3{
-    flex-basis: 100%;
-    margin-bottom: 2em;
-}
-
-.clientInfoForm input{
-    flex-basis: 50%;
-    text-align: left!important;
-}
-
-.clientInfoForm input[id='people']{
-    text-align: center!important;
-}
-
-.clientInfoForm label{
+#people input[type="number"]{
+    text-align: center;
+    padding: .5em;
     flex-basis: 25%;
-    text-align: left;
 }
-
-input[type="number"] {
-    display: block;
-    margin: 0 auto 1em auto;
-    max-width: 20%;
-  }
-  
