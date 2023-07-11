@@ -2,10 +2,9 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
     width:100%;
-    margin: 1em 0;
+    margin: .5em 0;
     padding: 0 1em;
 
 }
@@ -22,11 +21,18 @@
     border-radius: 0.375rem;
 }
 
-input[type="number"] {
+.formItem:has(input[type="number"]){
+    flex-direction: column;
+}
+
+.formItem input[type="number"] {
     display: block;
-    margin: 0 auto 1em auto;
     flex-basis: 10%;
-  }
+}
+
+.formItem input[type="number"].invalidInput {
+    background-image: none;
+}
 
 .formItem .invalidInput{
     background: white url("../../Pictures/error.svg") no-repeat right center;
@@ -39,8 +45,13 @@ input[type="number"] {
     outline: #b56a72 solid .15em;
 }
 
+input[type="number"]+.formAlert{
+    margin-left: 0;
+}
+
 .formAlert{
-    margin-left: auto;
+    margin-left: 25%;
     margin-top: .5em;
     padding: .5em;
 }
+
