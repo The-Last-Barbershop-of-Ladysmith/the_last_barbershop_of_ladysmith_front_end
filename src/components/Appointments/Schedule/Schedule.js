@@ -1,11 +1,12 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Schedule.css";
-import DatePicker from "./DatePicker";
-import TimePicker from "./TimePicker";
-import ClientInfo from "./ClientInfo";
+import DatePicker from "./forms/DatePicker";
+import TimePicker from "./forms/TimePicker";
+import ClientInfo from "./forms/ClientInfo";
 import Review from "./Review";
 import { createAppointment } from "./Schedule.service";
+import { validateDateTimeForm, validateInforForm } from "./ScheduleFormValidation";
 
 const DateTimePicker = () => {
   const clientNumRef = useRef(null);
@@ -53,8 +54,8 @@ const DateTimePicker = () => {
   const handleNext = (event) => {
     event.preventDefault();
     const stepRefs = [clientNumRef, dateRef, reviewRef];
-    const formValidationsByTab = [validateInforForm];
-    // formValidationsByTab[stepCounter]();
+    const formValidationsByTab = [validateInforForm, validateDateTimeForm];
+    formValidationsByTab[stepCounter](formData, errorFields.current)
     if (errorFields.current.length) {
       setShowErrors(true);
     } else {
@@ -73,15 +74,6 @@ const DateTimePicker = () => {
     nextStep.current.click();
   };
 
-  const validateFirstName = () => {
-    if (!formData.first_name.length) {
-      // errorFields.current.push("first_name");
-    }
-  };
-
-  const validateInforForm = () => {
-    validateFirstName();
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

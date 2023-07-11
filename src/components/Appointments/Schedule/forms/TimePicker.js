@@ -1,6 +1,6 @@
 import React from "react";
 import "./TimePicker.css"
-import FormItem from "../../Forms/FormItem";
+import FormItem from "../../../Forms/FormItem";
 const TimePicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
   const monToFri = [];
 

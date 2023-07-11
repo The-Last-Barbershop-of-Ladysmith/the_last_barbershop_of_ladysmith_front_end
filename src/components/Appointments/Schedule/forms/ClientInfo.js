@@ -1,6 +1,6 @@
 import React from "react";
 import "./ClientInfo.css";
-import FormItem from "../../Forms/FormItem";
+import FormItem from "../../../Forms/FormItem";
 
 const ClientInfo = ({ formData, handleChange, errorFields, showErrors }) => {
   return (

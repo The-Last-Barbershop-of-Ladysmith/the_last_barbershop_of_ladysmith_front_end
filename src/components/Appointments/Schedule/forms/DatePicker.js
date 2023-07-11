@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./DatePicker.css"
-import FormItem from "../../Forms/FormItem";
+import FormItem from "../../../Forms/FormItem";
 
 const Calendar = ({
   formData, handleDecrease, handleIncrease, handleMonthSelect, handleChange
