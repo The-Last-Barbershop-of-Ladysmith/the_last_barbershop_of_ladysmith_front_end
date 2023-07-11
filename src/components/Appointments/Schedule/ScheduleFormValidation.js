@@ -21,10 +21,11 @@ const dateIsValid = (appointmentDate) => {
 const timeIsValid = (appointmentTime) => {
     const isNotEmpty = appointmentTime.trim().length > 0
     const isCorrectFormat = appointmentTime.match(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)
+    return isNotEmpty && isCorrectFormat
 }
 
-const validateInforForm = (formData, errorFields) => {
-  const { first_name, last_name, mobile_number, people } = formData;
+const getInvalidInfoFormFields = ({ first_name, last_name, mobile_number, people }) => {
+  const errorFields = []
   const validFields = {
     first_name: nameIsValid(first_name),
     last_name: nameIsValid(last_name),
@@ -34,14 +35,16 @@ const validateInforForm = (formData, errorFields) => {
   Object.keys(validFields).forEach((field) => {
     if (!validFields[field]) errorFields.push(field);
   });
+  return errorFields
 };
 
-const validateDateTimeForm = (formData, errorFields) =>{
-    const {appointment_date, appointment_time} = formData
+const getInvalidDateTimeFields = ({appointment_date, appointment_time}) =>{
+  const errorFields = []
     if (!dateIsValid(appointment_date)) errorFields.push('appointment_date')
     if (!timeIsValid(appointment_time)) errorFields.push('appointment-time')
+    return errorFields
 }
 
 module.exports = {
-  validateInforForm, validateDateTimeForm
+  getInvalidInfoFormFields, getInvalidDateTimeFields
 }

@@ -6,15 +6,15 @@ import TimePicker from "./forms/TimePicker";
 import ClientInfo from "./forms/ClientInfo";
 import Review from "./Review";
 import { createAppointment } from "./Schedule.service";
-import { validateDateTimeForm, validateInforForm } from "./ScheduleFormValidation";
+import { getInvalidDateTimeFields, getInvalidInfoFormFields } from "./ScheduleFormValidation";
+
 
 const DateTimePicker = () => {
   const clientNumRef = useRef(null);
   const dateRef = useRef(null);
   const reviewRef = useRef(null);
   const [stepCounter, setStepCounter] = useState(0);
-  const [showErrors, setShowErrors] = useState(false);
-  const errorFields = useRef([]);
+  const [errorFields, setErrorFields] = useState([]);
   const [formData, setFormData] = useState({
     people: 1,
     appointment_date: new Date(),
@@ -54,11 +54,10 @@ const DateTimePicker = () => {
   const handleNext = (event) => {
     event.preventDefault();
     const stepRefs = [clientNumRef, dateRef, reviewRef];
-    const formValidationsByTab = [validateInforForm, validateDateTimeForm];
-    formValidationsByTab[stepCounter](formData, errorFields.current)
-    if (errorFields.current.length) {
-      setShowErrors(true);
-    } else {
+    const getInvalidFieldsByTab = [getInvalidInfoFormFields, getInvalidDateTimeFields];
+    const fieldsWithError = getInvalidFieldsByTab[stepCounter](formData)
+    setErrorFields(fieldsWithError)
+    if (!fieldsWithError.length) {
       stepRefs[stepCounter].current.dataset.tabActive = true;
       setStepCounter((prev) => prev + 1);
       const nextStep = stepRefs[stepCounter + 1];
@@ -209,8 +208,7 @@ const DateTimePicker = () => {
           <ClientInfo
             formData={formData}
             handleChange={handleFormChange}
-            errorFields={errorFields.current}
-            showErrors={showErrors}
+            errorFields={errorFields}
           />
         </div>
         <div
