@@ -7,19 +7,19 @@ const ClientInfo = ({ formData, handleChange, errorFields }) => {
     first_name: {
       type: "text",
       label: "First Name",
-      inputErrorMsg: "Required - Must be only letters and dashes",
+      inputErrorMsg: "Must be only letters and dashes",
     },
     last_name: {
       type: "text",
       label: "Last Name",
-      inputErrorMsg: "Required - Must be only letters and dashes",
+      inputErrorMsg: "Must be only letters and dashes",
     },
     mobile_number: {
       type: "text",
       mask: "999-999-9999",
       maskPlaceholder: "_",
       label: "Mobile Number",
-      inputErrorMsg: "Required - Must be in format 999-999-9999",
+      inputErrorMsg: "Must be in format 999-999-9999",
     },
   };
   const peopleField = {
@@ -27,7 +27,7 @@ const ClientInfo = ({ formData, handleChange, errorFields }) => {
       type: "number",
       label: "People",
       otherInputOptions: {min:1},
-      inputErrorMsg: "Required - Must be a value greater than zero",
+      inputErrorMsg: "Must be a value greater than zero",
     },
   }
   return (
@@ -45,6 +45,7 @@ const ClientInfo = ({ formData, handleChange, errorFields }) => {
             value={formData[field]}
             onChange={handleChange}
             showError={ errorFields.includes(field)}
+            required={true}
             {...clientInfoFields[field]}
           />
         ))}
@@ -61,6 +62,7 @@ const ClientInfo = ({ formData, handleChange, errorFields }) => {
             value={formData[field]}
             onChange={handleChange}
             showError={ errorFields.includes(field)}
+            required={true}
             {...peopleField[field]}
           />
         ))}

@@ -39,12 +39,14 @@
 .progressbar {
   counter-reset: step;
   border: none;
+  justify-content: center;
 }
 
 .nav{
   --bs-nav-link-hover-color:white;
   --bs-nav-link-color:white;
 }
+
 .progressbar .nav-link{
   list-style: none;
   display: inline-block;
@@ -65,46 +67,72 @@
 }
 
 .progressbar li:before {
+  position: relative;
   content: counter(step);
   counter-increment: step;
+  color: white;
   width: 30px;
   height: 30px;
   line-height : 30px;
-  border: 1px solid #ffffff;
   border-radius: 100%;
   display: block;
   text-align: center;
   margin: 0 auto 10px auto;
-  background-color: #ffffff;
+  box-shadow: inset .15em .15em .15em  #5f5b5b;
+  background:  linear-gradient(180deg, 
+    #6c6c6c, #adadad
+      );
+  background-repeat: no-repeat;
+  background-position: center var(--gradoffset);
+  background-size: 100% 200%;
+  z-index: 3;
+}
+
+.bgBar{
+  position: absolute;
+  width: 66.6%;
+  height: 0.35em;
+  top: 3.5em;
+  z-index: -2;
+  background-color: white;
+  opacity: 25%;
+  border-style: groove;
+  border-color: #8b99a9;
 }
 .progressbar li:after {
+  display: block;
   content: "";
   position: absolute;
-  width: 100%;
+  width: 0;
   height: .35em;
-  background-color: #ffffff;
   top: 1.25em;
   left: -50%;
   z-index : -1;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  border-style: outset;
+  border-color: #8b99a9;
+  box-shadow:  .15em .15em .15em  #3b3838;
 }
 .progressbar li:first-child:after {
   content: none;
 }
 .progressbar li {
   color: #8b99a9;
-  pointer-events:'none'
+  pointer-events:'none';
 }
 .progressbar li[data-tab-active='true']:before {
-  border-color: #8b99a9;
-  background-color: #8b99a9;
+  box-shadow: inset 0.15em 0.15em 0.03em #adadad;
+  background: linear-gradient(180deg, #a1b1c4, #717b87 );
 } 
 .progressbar li[data-tab-active='true'] + li:after {
   background-color: #8b99a9;
+  width: 100%;
 }
 
 
 .tab-pane{
-    padding: 1em;
+    padding: 0 1em;
 }
 
 .active#Date-Time{
@@ -129,6 +157,10 @@
 
 .closeBtn {
   font-size: 1em!important;
+}
+
+.scheduleCard fieldset{
+  margin: 1em 0
 }
 
 @media only screen and (min-width: 992px) {

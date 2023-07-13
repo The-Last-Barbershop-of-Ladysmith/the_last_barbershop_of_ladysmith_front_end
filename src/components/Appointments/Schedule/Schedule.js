@@ -68,7 +68,7 @@ const DateTimePicker = () => {
   const handlePrev = (event) => {
     event.preventDefault();
     const stepRefs = [clientNumRef, dateRef, reviewRef];
-    setStepCounter((prev) => prev - 1);
+    stepRefs[stepCounter-1].current.dataset.tabActive = false;
     const nextStep = stepRefs[stepCounter - 1];
     nextStep.current.click();
   };
@@ -141,6 +141,7 @@ const DateTimePicker = () => {
         </button>
       </div>
       <ul className="nav nav-tabs progressbar" id="myTab" role="tablist">
+        <div className="bgBar"></div>
         <li
           className="nav-link active"
           id="client-info-tab"

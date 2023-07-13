@@ -1,9 +1,10 @@
 import React from 'react';
 import './FormItem.css';
 import ReactInputMask from "comigo-tech-react-input-mask";
+import AppAlert from '../AppAlert/AppAlert';
 
 const FormItem = ({
-    type, id, name, value, onChange, label, 
+    type, id, name, value, onChange, label, required,
     mask, maskPlaceholder, showError, inputErrorMsg, otherInputOptions, altFormClass
 }) => {
   return (
@@ -15,14 +16,19 @@ const FormItem = ({
         type={type}
         id={id}
         name={name}
-        className={showError? 'formControl invalidInput': 'formControl'} 
+        className={showError ? "formControl invalidInput" : "formControl"}
         value={value}
         onChange={onChange}
         {...otherInputOptions}
       />
-      {showError && <div class="alert formAlert alert-danger" role="alert">
-        {inputErrorMsg}
-      </div> }
+      {showError && (
+        <AppAlert
+          severity="danger"
+          emphasize={required && "Required -"}
+          message={inputErrorMsg}
+          addClass='formAlert'
+        />
+      )}
     </label>
   );
 }
