@@ -1,3 +1,5 @@
+import React from "react";
+
 const AppAlert = ({ severity, title, emphasize, message, addClass }) => {
   return (
     <div className={`alert ${addClass} alert-${severity}`} role="alert">

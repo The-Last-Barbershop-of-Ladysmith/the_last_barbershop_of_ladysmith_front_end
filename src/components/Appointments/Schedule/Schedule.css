@@ -150,6 +150,11 @@
   flex-basis: 15%;
 }
 
+.btn:hover, .btn:focus{
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
 .btn:has(.closeBtn){
   border: none;
   border-radius: 50%;
@@ -161,6 +166,25 @@
 
 .scheduleCard fieldset{
   margin: 1em 0
+}
+
+.selectedDateTime{
+  flex-basis: 100%;
+  margin-top: 0.5em;
+  letter-spacing: .2em;
+  position: sticky;
+  top: 0;
+  text-align: center;
+}
+
+.selectedDateTime>span{
+  background-color: var(--battleShipGrey);
+  z-index: 1000;
+  border-radius: 1em;
+  width: fit-content;
+  padding: .05em 2%;
+  display: block;
+  margin: auto;
 }
 
 @media only screen and (min-width: 992px) {

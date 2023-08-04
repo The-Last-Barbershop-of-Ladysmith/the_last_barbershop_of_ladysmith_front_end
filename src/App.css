@@ -3,6 +3,16 @@ body{
   background-color: black!important;
 }
 
+:root{
+  --battleShipGrey: #858888;
+  --richBlack: #161d26;
+  --cadetGrey: #8b99a9;
+  --darkElectricBlue: #5f6e7e;
+  --davysGrey: #34332c;
+  --primary-color: var(--richBlack);
+  --secondary-color:var(--darkElectricBlue);
+}
+
 /* Color Palette */
 .battleShipGrey {
   background-color: #858888;
@@ -63,15 +73,14 @@ table, td {
   background-color: aliceblue;
 }
 
-:root{
-  --secondary-color: #5f6e7e;
-  --primary-color: #8b99a9;
-}
-
 .btn-primary{
   background-color: var(--primary-color);
   border-color: var(--primary-color);
   color: white;
+}
+
+.btn-primary:hover, .btn-primary:focus{
+  box-shadow:0 0 0 0.25rem var(--darkElectricBlue)
 }
 
 .btn-secondary{

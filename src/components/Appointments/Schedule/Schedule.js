@@ -6,8 +6,11 @@ import TimePicker from "./forms/TimePicker";
 import ClientInfo from "./forms/ClientInfo";
 import Review from "./Review";
 import { createAppointment } from "./Schedule.service";
-import { getInvalidDateTimeFields, getInvalidInfoFormFields } from "./ScheduleFormValidation";
-
+import {
+  getInvalidDateTimeFields,
+  getInvalidInfoFormFields,
+} from "./ScheduleFormValidation";
+import AppAlert from "../../AppAlert/AppAlert";
 
 const DateTimePicker = () => {
   const clientNumRef = useRef(null);
@@ -23,7 +26,7 @@ const DateTimePicker = () => {
     first_name: "",
     last_name: "",
   });
-
+  console.log(errorFields)
   const month = formData.appointment_date.getMonth();
   const navigate = useNavigate();
 
@@ -42,6 +45,7 @@ const DateTimePicker = () => {
       setFormData({
         ...formData,
         appointment_date: new Date(target.value),
+        appointment_time: ""
       });
     } else {
       setFormData({
@@ -54,9 +58,12 @@ const DateTimePicker = () => {
   const handleNext = (event) => {
     event.preventDefault();
     const stepRefs = [clientNumRef, dateRef, reviewRef];
-    const getInvalidFieldsByTab = [getInvalidInfoFormFields, getInvalidDateTimeFields];
-    const fieldsWithError = getInvalidFieldsByTab[stepCounter](formData)
-    setErrorFields(fieldsWithError)
+    const getInvalidFieldsByTab = [
+      getInvalidInfoFormFields,
+      getInvalidDateTimeFields,
+    ];
+    const fieldsWithError = getInvalidFieldsByTab[stepCounter](formData);
+    setErrorFields(fieldsWithError);
     if (!fieldsWithError.length) {
       stepRefs[stepCounter].current.dataset.tabActive = true;
       setStepCounter((prev) => prev + 1);
@@ -68,11 +75,10 @@ const DateTimePicker = () => {
   const handlePrev = (event) => {
     event.preventDefault();
     const stepRefs = [clientNumRef, dateRef, reviewRef];
-    stepRefs[stepCounter-1].current.dataset.tabActive = false;
+    stepRefs[stepCounter - 1].current.dataset.tabActive = false;
     const nextStep = stepRefs[stepCounter - 1];
     nextStep.current.click();
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,12 +90,12 @@ const DateTimePicker = () => {
 
   const formButton =
     stepCounter === 2 ? (
-      <button type="Submit" className="btn btn-primary" onClick={handleSubmit}>
+      <button type="Submit" className="btn btn-primary richBlack" onClick={handleSubmit}>
         Submit
       </button>
     ) : (
-      <button type="button" className="btn btn-primary " onClick={handleNext}>
-        Next
+      <button type="button" className="btn btn-primary richBlack " onClick={handleNext}>
+        Next 
       </button>
     );
 
@@ -108,9 +114,11 @@ const DateTimePicker = () => {
     d.setDate(1);
     setFormData({
       ...formData,
+      appointment_time: "",
       appointment_date: d,
     });
   };
+  console.log(formData)
   const handleMonthPrevClick = (e) => {
     e.preventDefault();
     const d = new Date();
@@ -119,6 +127,7 @@ const DateTimePicker = () => {
     setFormData({
       ...formData,
       appointment_date: d,
+      appointment_time: "",
     });
   };
 
@@ -126,12 +135,25 @@ const DateTimePicker = () => {
     setFormData({
       ...formData,
       appointment_date: new Date(),
+      appointment_time: "",
     });
   };
 
   const disabledTab = {
-    pointerEvents: "none", //This makes it not clickable
+    pointerEvents: "none", 
   };
+
+  const dateSelectedLabel =  formData.appointment_date.toLocaleDateString('en-US',{
+    month:'long',
+    day: 'numeric',
+  }) 
+
+  const timeSelectedLabel = formData.appointment_time.length > 0 ? `@ ${formData.appointment_date.toLocaleTimeString('en-US', {
+    hour:'numeric', 
+    minute: '2-digit',
+    hour12:true,
+  })}` : ""
+
 
   return (
     <div className="scheduleCard card davysGrey">
@@ -218,6 +240,19 @@ const DateTimePicker = () => {
           role="tabpanel"
           aria-labelledby="Date-Time-tab"
         >
+          {errorFields.includes('appointment_time') && 
+            <AppAlert
+              severity="danger"
+              addClass="col-12 m-2 p-1"
+              message='Please select a time'
+              emphasize='Required - '
+            />
+          }
+          <strong className="selectedDateTime">
+            <span className="cadetGrey">
+              {dateSelectedLabel + " " + timeSelectedLabel}
+            </span>
+          </strong>
           <DatePicker
             formData={formData}
             handleDecrease={handleMonthPrevClick}

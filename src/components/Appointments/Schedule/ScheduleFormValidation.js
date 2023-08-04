@@ -41,7 +41,7 @@ const getInvalidInfoFormFields = ({ first_name, last_name, mobile_number, people
 const getInvalidDateTimeFields = ({appointment_date, appointment_time}) =>{
   const errorFields = []
     if (!dateIsValid(appointment_date)) errorFields.push('appointment_date')
-    if (!timeIsValid(appointment_time)) errorFields.push('appointment-time')
+    if (!timeIsValid(appointment_time)) errorFields.push('appointment_time')
     return errorFields
 }
 

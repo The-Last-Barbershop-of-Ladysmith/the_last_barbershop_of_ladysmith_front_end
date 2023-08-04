@@ -8,9 +8,13 @@
     background-color: transparent;
 }
 
+.calendarCard table{
+    margin-bottom: 0;
+}
+
 .selectedDate{
     background-color: #2d2c2c;
-    border-color: #272727;
+    border-color: #272727!important;
     box-shadow:  .15em .15em .15em  #323030;
     color: white;
 }
