@@ -1,7 +1,8 @@
 import React from "react";
 import "./TimePicker.css"
 import FormItem from "../../../Forms/FormItem";
-const TimePicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
+import AppAlert from "../../../AppAlert/AppAlert";
+const TimePicker = ({ dateSelected, formatApptDate, handleTimeSelect, hasError }) => {
   const monToFri = [];
 
   for (let i = 10; i < 17; i++) {
@@ -32,6 +33,7 @@ const TimePicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
     const newDateTime = new Date(formatApptDate(dateSelected) + "T" + hour)
     return (
         <FormItem
+          key={hour}
           type="radio" 
           id={hour} 
           name='appointment_time'
@@ -46,6 +48,7 @@ const TimePicker = ({ dateSelected, formatApptDate, handleTimeSelect }) => {
   
   return (
       <fieldset className="card timeCard col-lg-4">
+        {hasError && <AppAlert severity='danger' message='Please select a time'/>}
         <legend className="card-header">
           <span className="material-symbols-outlined">schedule</span>
           <span> Select Time</span>

@@ -12,6 +12,13 @@
     margin-bottom: 0;
 }
 
+.btn{
+    color: white;
+}
+.btn:disabled{
+    display: none;
+}
+
 .selectedDate{
     background-color: #2d2c2c;
     border-color: #272727!important;

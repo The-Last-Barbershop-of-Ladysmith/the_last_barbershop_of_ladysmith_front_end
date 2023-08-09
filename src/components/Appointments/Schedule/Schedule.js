@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Schedule.css";
 import DatePicker from "./forms/DatePicker";
@@ -16,6 +16,7 @@ const DateTimePicker = () => {
   const clientNumRef = useRef(null);
   const dateRef = useRef(null);
   const reviewRef = useRef(null);
+  const [formErrorAlert, setFormErrorAlert] = useState();
   const [stepCounter, setStepCounter] = useState(0);
   const [errorFields, setErrorFields] = useState([]);
   const [formData, setFormData] = useState({
@@ -26,7 +27,9 @@ const DateTimePicker = () => {
     first_name: "",
     last_name: "",
   });
-  console.log(errorFields)
+  const formAlertRef = useCallback((alertNode)=>{
+    setFormErrorAlert(alertNode)
+  },[])
   const month = formData.appointment_date.getMonth();
   const navigate = useNavigate();
 
@@ -69,14 +72,19 @@ const DateTimePicker = () => {
       setStepCounter((prev) => prev + 1);
       const nextStep = stepRefs[stepCounter + 1];
       nextStep.current.click();
-    }
+    } 
   };
+
+  useEffect(()=>{
+    if(formErrorAlert) formErrorAlert.focus()
+  },[formErrorAlert])
 
   const handlePrev = (event) => {
     event.preventDefault();
     const stepRefs = [clientNumRef, dateRef, reviewRef];
     stepRefs[stepCounter - 1].current.dataset.tabActive = false;
     const nextStep = stepRefs[stepCounter - 1];
+    setErrorFields([])
     nextStep.current.click();
   };
 
@@ -109,24 +117,22 @@ const DateTimePicker = () => {
 
   const handleMonthNextClick = (e) => {
     e.preventDefault();
-    const d = new Date();
-    d.setMonth(month + 1);
-    d.setDate(1);
+    formData.appointment_date.setMonth(month + 1);
+    formData.appointment_date.setDate(1);
+    console.log(formData)
     setFormData({
       ...formData,
       appointment_time: "",
-      appointment_date: d,
     });
   };
-  console.log(formData)
+  
   const handleMonthPrevClick = (e) => {
     e.preventDefault();
-    const d = new Date();
-    d.setMonth(month - 1);
-    d.setDate(1);
+    formData.appointment_date.setMonth(month - 1);
+    formData.appointment_date.setDate(1);
+    console.log(formData)
     setFormData({
       ...formData,
-      appointment_date: d,
       appointment_time: "",
     });
   };
@@ -156,7 +162,7 @@ const DateTimePicker = () => {
 
 
   return (
-    <div className="scheduleCard card davysGrey">
+    <div className="scheduleCard card">
       <div className="d-flex justify-content-end">
         <button className="btn btn-secondary justify-self-end">
           <span className="material-symbols-outlined closeBtn">close</span>
@@ -222,6 +228,14 @@ const DateTimePicker = () => {
       </ul>
 
       <form className="tab-content card-body p-0" id="myTabContent">
+        {errorFields.length > 0 && 
+          <AppAlert
+            severity="danger"
+            message=' Error(s) Found!'
+            emphasize={errorFields.length}
+            useRef={formAlertRef}
+          /> 
+        }
         <div
           className="tab-pane fade show active"
           id="client-info"
@@ -240,16 +254,8 @@ const DateTimePicker = () => {
           role="tabpanel"
           aria-labelledby="Date-Time-tab"
         >
-          {errorFields.includes('appointment_time') && 
-            <AppAlert
-              severity="danger"
-              addClass="col-12 m-2 p-1"
-              message='Please select a time'
-              emphasize='Required - '
-            />
-          }
           <strong className="selectedDateTime">
-            <span className="cadetGrey">
+            <span>
               {dateSelectedLabel + " " + timeSelectedLabel}
             </span>
           </strong>
@@ -264,6 +270,7 @@ const DateTimePicker = () => {
             dateSelected={formData.appointment_date}
             formatApptDate={formatApptDate}
             handleTimeSelect={handleFormChange}
+            hasError={errorFields.includes('appointment_time')}
           />
         </div>
         <div

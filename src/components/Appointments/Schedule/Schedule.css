@@ -1,5 +1,7 @@
 .scheduleCard {
-  color: white;
+  /* color: white; */
+  background-color: rgba(var(--davysGreyRGB), .7);
+  backdrop-filter: blur(.5em);
   margin: auto;
   overflow-y: auto;
   width: 90%;
@@ -175,20 +177,19 @@
   position: sticky;
   top: 0;
   text-align: center;
+  z-index: 1000;
 }
 
 .selectedDateTime>span{
   background-color: var(--battleShipGrey);
-  z-index: 1000;
   border-radius: 1em;
-  width: fit-content;
   padding: .05em 2%;
   display: block;
   margin: auto;
 }
 
 @media only screen and (min-width: 992px) {
-  input[type="number"] {
-    max-width: 5%;
+  .selectedDateTime{
+    width: fit-content!important;
   }
 }

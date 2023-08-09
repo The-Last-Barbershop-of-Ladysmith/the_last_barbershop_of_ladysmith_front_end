@@ -58,7 +58,8 @@ const ClientInfo = ({ formData, handleChange, errorFields }) => {
         {Object.keys(peopleField).map((field) => (
           <FormItem
             id={field}
-            name={field}  
+            name={field} 
+            key={field} 
             value={formData[field]}
             onChange={handleChange}
             showError={ errorFields.includes(field)}

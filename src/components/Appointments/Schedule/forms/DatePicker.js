@@ -7,7 +7,6 @@ const Calendar = ({
 }) => {
 
   const {appointment_date} = formData
-  const appointmentDate = new Date(appointment_date)
 
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 781px)").matches
@@ -45,11 +44,12 @@ const Calendar = ({
       .addEventListener("change", (e) => setMatches(e.matches));
   }, []);
   const startDate = new Date(formData.appointment_date)
+  console.log(startDate)
   startDate.setDate(1);
   const firstDay = startDate.getDay();
   const year = startDate.getFullYear();
   const monthEnd = new Date(year, startDate.getMonth() + 1, 0);
-
+  console.log(monthEnd)
   // Gather table data with each calendar day for the month
   Object.keys(calendarWeekDates).forEach((weekNum) => {
     const week = calendarWeekDates[weekNum];
@@ -63,20 +63,22 @@ const Calendar = ({
         tableData = <td key={day}></td>;
       } else {
         const today = new Date()
-        const cellDate = new Date();
-        cellDate.setMonth(new Date(appointment_date).getMonth())
-        cellDate.setDate(day)
+        const cellDate = new Date(
+          appointment_date.getFullYear(),
+          appointment_date.getMonth(),
+          day
+        ); 
         // else return cell with the day number
         tableData = (
           <td key={day} id='calendarDate'>
             <FormItem
               type="radio"
               id={day}
-              altFormClass={appointmentDate.getDate() === cellDate.getDate() ? 'dateLabel selectedDate': 'dateLabel'}
+              altFormClass={appointment_date.getDate() === cellDate.getDate() ? 'dateLabel selectedDate': 'dateLabel'}
               name="appointment_date"
               value={cellDate}
               onChange={handleChange}
-              otherInputOptions={{disabled: cellDate < today}}
+              otherInputOptions={{disabled: cellDate < today }}
               label={day}
             />
           </td>
@@ -96,16 +98,25 @@ const Calendar = ({
     <fieldset className="card calendarCard text-center col-lg-8">
       <legend className="card-header">
         <span className="material-symbols-outlined">today</span>
-        <span>  Select Date</span>
+        <span> Select Date</span>
       </legend>
       <div className="card-body">
         <div className="card-title container">
           <div className="row">
             <div className="col-3">
-              <button className="btn" onClick={handleDecrease}>{`<`}</button>
+              <button
+                className="btn"
+                onClick={handleDecrease}
+                disabled={
+                  formData.appointment_date.getMonth() <= new Date().getMonth() 
+                  && formData.appointment_date.getFullYear() <= new Date().getFullYear()
+                }
+              >{`<`}</button>
             </div>
             <div className="col-6">
-              <h4 onClick={handleMonthSelect}>{monthNames[new Date(formData.appointment_date).getMonth()]}</h4>
+              <h4 onClick={handleMonthSelect}>
+                {monthNames[new Date(formData.appointment_date).getMonth()]}
+              </h4>
             </div>
             <div className="col-3">
               <button className="btn" onClick={handleIncrease}>{`>`}</button>

@@ -1,6 +1,6 @@
 const nameIsValid = (name) => {
   const isNotEmpty = name.trim().length > 0;
-  const containsLettersAndDashesOnly = name.match(/[A-Za-z0-9\-\_]+/);
+  const containsLettersAndDashesOnly = name.match(/[A-Za-z0-9\-_]+/);
   return isNotEmpty && containsLettersAndDashesOnly;
 };
 
@@ -13,10 +13,6 @@ const mobileNumberIsValid = (mobile_number) => {
 const peopleIsValid = (people) => {
   return people > 0;
 };
-
-const dateIsValid = (appointmentDate) => {
-    return appointmentDate > new Date()
-}
 
 const timeIsValid = (appointmentTime) => {
     const isNotEmpty = appointmentTime.trim().length > 0
@@ -38,9 +34,8 @@ const getInvalidInfoFormFields = ({ first_name, last_name, mobile_number, people
   return errorFields
 };
 
-const getInvalidDateTimeFields = ({appointment_date, appointment_time}) =>{
+const getInvalidDateTimeFields = ({appointment_time}) =>{
   const errorFields = []
-    if (!dateIsValid(appointment_date)) errorFields.push('appointment_date')
     if (!timeIsValid(appointment_time)) errorFields.push('appointment_time')
     return errorFields
 }

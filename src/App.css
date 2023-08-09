@@ -6,9 +6,11 @@ body{
 :root{
   --battleShipGrey: #858888;
   --richBlack: #161d26;
+  --richBlackRGB: 22, 29, 38;
   --cadetGrey: #8b99a9;
   --darkElectricBlue: #5f6e7e;
   --davysGrey: #34332c;
+  --davysGreyRGB: 52,51,44;
   --primary-color: var(--richBlack);
   --secondary-color:var(--darkElectricBlue);
 }
