@@ -115,11 +115,19 @@ const DateTimePicker = () => {
     return `${year}-${month}-${day}`;
   }
 
+  const isCurrentMonth = () => {
+    const { appointment_date } = formData;
+    const today = new Date();
+    return (
+      appointment_date.getMonth() === today.getMonth() &&
+      appointment_date.getFullYear() === today.getFullYear
+    );
+  };
+
   const handleMonthNextClick = (e) => {
     e.preventDefault();
     formData.appointment_date.setMonth(month + 1);
     formData.appointment_date.setDate(1);
-    console.log(formData)
     setFormData({
       ...formData,
       appointment_time: "",
@@ -128,12 +136,13 @@ const DateTimePicker = () => {
   
   const handleMonthPrevClick = (e) => {
     e.preventDefault();
-    formData.appointment_date.setMonth(month - 1);
-    formData.appointment_date.setDate(1);
-    console.log(formData)
+    let {appointment_date} = formData
+    appointment_date.setMonth(month - 1);
+    isCurrentMonth? appointment_date = new Date(): appointment_date.setDate(1);
     setFormData({
       ...formData,
       appointment_time: "",
+      appointment_date
     });
   };
 
