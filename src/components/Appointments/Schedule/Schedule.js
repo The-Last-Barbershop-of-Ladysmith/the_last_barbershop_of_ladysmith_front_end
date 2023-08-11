@@ -19,11 +19,13 @@ const DateTimePicker = () => {
   const [formErrorAlert, setFormErrorAlert] = useState();
   const [stepCounter, setStepCounter] = useState(0);
   const [errorFields, setErrorFields] = useState([]);
+  const [apiError, setApiError] = useState(false);
+  const [showApiAlert, setShowApiAlert] = useState(false);
   const [formData, setFormData] = useState({
     people: 1,
     appointment_date: new Date(),
     appointment_time: "",
-    mobile_number: "___-___-_____",
+    mobile_number: "",
     first_name: "",
     last_name: "",
   });
@@ -32,6 +34,10 @@ const DateTimePicker = () => {
   },[])
   const month = formData.appointment_date.getMonth();
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(formErrorAlert) formErrorAlert.focus()
+  },[formErrorAlert])
 
   const handleFormChange = ({ target }) => {
     if (target.name === "appointment_time") {
@@ -50,7 +56,11 @@ const DateTimePicker = () => {
         appointment_date: new Date(target.value),
         appointment_time: ""
       });
-    } else {
+    }else {
+      if (target.name == 'mobile_number' && target.value.length == 11){
+        target.value = [...target.value].shift().toString()
+      }
+      console.log(target.value)
       setFormData({
         ...formData,
         [target.name]: target.value,
@@ -75,16 +85,13 @@ const DateTimePicker = () => {
     } 
   };
 
-  useEffect(()=>{
-    if(formErrorAlert) formErrorAlert.focus()
-  },[formErrorAlert])
-
   const handlePrev = (event) => {
     event.preventDefault();
     const stepRefs = [clientNumRef, dateRef, reviewRef];
     stepRefs[stepCounter - 1].current.dataset.tabActive = false;
     const nextStep = stepRefs[stepCounter - 1];
     setErrorFields([])
+    setShowApiAlert(false)
     nextStep.current.click();
   };
 
@@ -92,13 +99,16 @@ const DateTimePicker = () => {
     e.preventDefault();
     const formattedDate = formatApptDate(formData.appointment_date);
     const appointmentData = { ...formData, appointment_date: formattedDate };
-    const appointment = await createAppointment(appointmentData);
-    if (appointment) navigate(`/appointments/${appointment.appointment_id}`);
+    const appointment = await createAppointment(appointmentData, setApiError);
+    setShowApiAlert(true)
+    if (appointment) {
+      navigate(`/appointments/${appointment.appointment_id}`)
+    }
   };
 
   const formButton =
     stepCounter === 2 ? (
-      <button type="Submit" className="btn btn-primary richBlack" onClick={handleSubmit}>
+      <button type="submit" className="btn btn-primary align-self-right richBlack">
         Submit
       </button>
     ) : (
@@ -236,15 +246,27 @@ const DateTimePicker = () => {
         </li>
       </ul>
 
-      <form className="tab-content card-body p-0" id="myTabContent">
         {errorFields.length > 0 && 
           <AppAlert
             severity="danger"
             message=' Error(s) Found!'
+            addClass='text-center'
             emphasize={errorFields.length}
             useRef={formAlertRef}
           /> 
         }
+
+        {showApiAlert && 
+          <AppAlert
+            severity={apiError? 'danger': 'success'}
+            title={apiError? 'Oops! Something Went Wrong.' :  'Success!'}
+            message={apiError? 'Appointment unable to be scheduled at this time.  Please try again': 'Appointment Successfully scheduled'}
+            dismissable={true}
+            useRef={formAlertRef}
+          />  
+        }
+        
+      <form className="tab-content card-body p-0" id="myTabContent" onSubmit={handleSubmit}>
         <div
           className="tab-pane fade show active"
           id="client-info"
@@ -290,7 +312,6 @@ const DateTimePicker = () => {
         >
           <Review formData={formData} formatApptDate={formatApptDate} />
         </div>
-      </form>
       <div className="form-footer">
         <button
           type="button"
@@ -301,6 +322,7 @@ const DateTimePicker = () => {
         </button>
         {formButton}
       </div>
+      </form>
     </div>
   );
 };

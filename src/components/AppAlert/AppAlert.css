@@ -1,4 +1,18 @@
 .alert{
     padding: .5em;
     margin: .5em;
+    text-align: left;
+}
+
+.alert-heading{
+    font-weight: bold;
+    font-size: 1em;
+
+}
+
+.alertClose{
+    color: var(--richBlack);
+    position: absolute;
+    top: 0;
+    right: 0;
 }

@@ -34,7 +34,6 @@ const Calendar = ({
     "November",
     "December",
   ];
-  document.body.style = "background: white; color: black";
 
   const calendarWeekDates = { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
 
@@ -43,13 +42,12 @@ const Calendar = ({
       .matchMedia("(min-width: 781px)")
       .addEventListener("change", (e) => setMatches(e.matches));
   }, []);
+
   const startDate = new Date(formData.appointment_date)
-  console.log(startDate)
   startDate.setDate(1);
   const firstDay = startDate.getDay();
   const year = startDate.getFullYear();
   const monthEnd = new Date(year, startDate.getMonth() + 1, 0);
-  console.log(monthEnd)
   // Gather table data with each calendar day for the month
   Object.keys(calendarWeekDates).forEach((weekNum) => {
     const week = calendarWeekDates[weekNum];
@@ -63,10 +61,11 @@ const Calendar = ({
         tableData = <td key={day}></td>;
       } else {
         const today = new Date()
+        today.setHours(0,0,0,0)
         const cellDate = new Date(
           appointment_date.getFullYear(),
           appointment_date.getMonth(),
-          day
+          day,
         ); 
         // else return cell with the day number
         tableData = (

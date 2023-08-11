@@ -137,6 +137,11 @@
     padding: 0 1em;
 }
 
+form{
+  display: flex;
+  flex-direction: column;
+}
+
 .active#Date-Time{
     display: flex;
     flex-wrap: wrap;
@@ -145,7 +150,7 @@
 .form-footer{
   display: flex;
   justify-content: space-between;
-  margin: .5em
+  margin: auto 0.5em 0.5em 0.5em;
 }
 
 .form-footer .btn{
