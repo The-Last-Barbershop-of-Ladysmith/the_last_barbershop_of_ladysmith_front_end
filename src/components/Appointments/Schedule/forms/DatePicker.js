@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./DatePicker.css"
 import FormItem from "../../../Forms/FormItem";
 
@@ -7,6 +7,8 @@ const Calendar = ({
 }) => {
 
   const {appointment_date} = formData
+  const sectionLabel = useRef()
+  const [showCalendar, setShowCalendar] = useState(true)
 
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 781px)").matches
@@ -43,6 +45,10 @@ const Calendar = ({
       .addEventListener("change", (e) => setMatches(e.matches));
   }, []);
 
+  const handleSectionLabelClick = () => {
+    if (!matches) setShowCalendar((prev)=>!prev)
+  }
+
   const startDate = new Date(formData.appointment_date)
   startDate.setDate(1);
   const firstDay = startDate.getDay();
@@ -76,7 +82,9 @@ const Calendar = ({
               altFormClass={appointment_date.getDate() === cellDate.getDate() ? 'dateLabel selectedDate': 'dateLabel'}
               name="appointment_date"
               value={cellDate}
-              onChange={handleChange}
+              onChange={(e)=>{
+                handleChange(e);sectionLabel.current.click()}
+              }
               otherInputOptions={{disabled: cellDate < today }}
               label={day}
             />
@@ -94,11 +102,12 @@ const Calendar = ({
   });
 
   return (
-    <fieldset className="card calendarCard text-center col-lg-8">
-      <legend className="card-header">
+    <fieldset className="card calendarCard text-center col-12 col-lg-8">
+      <legend className="card-header" ref={sectionLabel} onClick={handleSectionLabelClick}>
         <span className="material-symbols-outlined">today</span>
         <span> Select Date</span>
       </legend>
+      {showCalendar && 
       <div className="card-body">
         <div className="card-title container">
           <div className="row">
@@ -133,6 +142,7 @@ const Calendar = ({
           </tbody>
         </table>
       </div>
+}
     </fieldset>
   );
 };
