@@ -45,6 +45,10 @@ const Calendar = ({
       .addEventListener("change", (e) => setMatches(e.matches));
   }, []);
 
+  useEffect(()=>{
+    if(matches) setShowCalendar(true)
+  },[matches])
+
   const handleSectionLabelClick = () => {
     if (!matches) setShowCalendar((prev)=>!prev)
   }
@@ -103,7 +107,7 @@ const Calendar = ({
 
   return (
     <fieldset className="card calendarCard text-center col-12 col-lg-8">
-      <legend className="card-header" ref={sectionLabel} onClick={handleSectionLabelClick}>
+      <legend className="card-header" ref={sectionLabel} onClick={handleSectionLabelClick} title="Show Calendar" style={showCalendar? {pointerEvents: 'none'}: null}>
         <span className="material-symbols-outlined">today</span>
         <span> Select Date</span>
       </legend>
