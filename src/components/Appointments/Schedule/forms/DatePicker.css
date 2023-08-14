@@ -8,6 +8,11 @@
     background-color: transparent;
 }
 
+.calendarCard legend:hover{
+    cursor: pointer;
+    border:solid .25em var(--darkElectricBlue);
+}
+
 .calendarCard table{
     margin-bottom: 0;
 }
@@ -57,5 +62,10 @@
 @media only screen and (min-width: 992px) {
     .dateLabel {
         padding: .5em;
+    }
+
+    .calendarCard legend:hover{
+        cursor:auto;
+        border: none;
     }
 }
