@@ -57,6 +57,7 @@ const DateTimePicker = () => {
         appointment_time: ""
       });
     }else {
+      //In case of autofil, mobile number will start with one.  Remove the first digit in this case
       if (target.name == 'mobile_number' && target.value.length == 11){
         target.value = [...target.value].shift().toString()
       }
