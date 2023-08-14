@@ -39,7 +39,7 @@ const TimePicker = ({ dateSelected, formatApptDate, handleTimeSelect, hasError }
           name='appointment_time'
           value={hour}
           onChange={handleTimeSelect}
-          label={hour}
+          label={newDateTime.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'})}
           otherInputOptions={{disabled:  today > newDateTime}}
           altFormClass={+dateSelected === +newDateTime ? ' timeOption selectedTime': 'timeOption'}
         />
