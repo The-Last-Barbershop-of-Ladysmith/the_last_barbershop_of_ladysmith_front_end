@@ -58,7 +58,7 @@ const DateTimePicker = () => {
       });
     }else {
       //In case of autofil, mobile number will start with one.  Remove the first digit in this case
-      if (target.name == 'mobile_number' && target.value.length == 11){
+      if (target.name === 'mobile_number' && target.value.length === 11){
         target.value = [...target.value].shift().toString()
       }
       console.log(target.value)
@@ -318,7 +318,7 @@ const DateTimePicker = () => {
           type="button"
           className="btn btn-secondary"
           onClick={handlePrev}
-          disabled={stepCounter==0}
+          disabled={stepCounter===0}
         >
           Back
         </button>
