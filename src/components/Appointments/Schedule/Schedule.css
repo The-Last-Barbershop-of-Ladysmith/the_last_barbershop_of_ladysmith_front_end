@@ -153,6 +153,10 @@ form{
   margin: auto 0.5em 0.5em 0.5em;
 }
 
+.form-footer .btn:disabled{
+  display: block;
+}
+
 .form-footer .btn{
   flex-basis: 15%;
 }

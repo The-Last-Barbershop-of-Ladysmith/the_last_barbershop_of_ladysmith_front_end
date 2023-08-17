@@ -318,6 +318,7 @@ const DateTimePicker = () => {
           type="button"
           className="btn btn-secondary"
           onClick={handlePrev}
+          disabled={stepCounter==0}
         >
           Back
         </button>
