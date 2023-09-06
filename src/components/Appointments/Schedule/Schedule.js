@@ -25,6 +25,7 @@ const DateTimePicker = () => {
     people: 1,
     appointment_date: new Date(),
     appointment_time: "",
+    appointment_end: "",
     mobile_number: "",
     first_name: "",
     last_name: "",
@@ -38,6 +39,21 @@ const DateTimePicker = () => {
   useEffect(()=>{
     if(formErrorAlert) formErrorAlert.focus()
   },[formErrorAlert])
+
+  // Calculate endtime to be 30 min after appointment's start time
+  const getAppointmentEndTime = ({people, appointment_date}) => {
+    const minutesNeeded = (people * 30) - 1
+    return new Date(appointment_date.getTime() + minutesNeeded * 60000)
+      .toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+  }
+
+  useEffect(()=>{
+    if(formData.appointment_time.length) setFormData({
+      ...formData, 
+      appointment_end: getAppointmentEndTime(formData)
+    })
+    console.log(formData, getAppointmentEndTime(formData))
+  }, [formData.people, formData.appointment_time])
 
   const handleFormChange = ({ target }) => {
     if (target.name === "appointment_time") {
@@ -174,12 +190,12 @@ const DateTimePicker = () => {
     day: 'numeric',
   }) 
 
-  const timeSelectedLabel = formData.appointment_time.length > 0 ? `@ ${formData.appointment_date.toLocaleTimeString('en-US', {
-    hour:'numeric', 
-    minute: '2-digit',
-    hour12:true,
-  })}` : ""
-
+  const timeSelectedLabel =
+    formData.appointment_time.length > 0
+      ? `@ ${formData.appointment_date.toLocaleTimeString("en-US", {
+          timeStyle: "short",
+        })} `
+      : "";
 
   return (
     <div className="scheduleCard card">
@@ -303,6 +319,7 @@ const DateTimePicker = () => {
             formatApptDate={formatApptDate}
             handleTimeSelect={handleFormChange}
             hasError={errorFields.includes('appointment_time')}
+            endTime={formData.appointment_end}
           />
         </div>
         <div

@@ -2,7 +2,7 @@ import React from "react";
 import "./TimePicker.css"
 import FormItem from "../../../Forms/FormItem";
 import AppAlert from "../../../AppAlert/AppAlert";
-const TimePicker = ({ dateSelected, formatApptDate, handleTimeSelect, hasError }) => {
+const TimePicker = ({ endTime ,dateSelected, formatApptDate, handleTimeSelect, hasError }) => {
   const monToFri = [];
 
   for (let i = 10; i < 17; i++) {
@@ -31,6 +31,7 @@ const TimePicker = ({ dateSelected, formatApptDate, handleTimeSelect, hasError }
     const today  =  new Date()
     today.setHours(today.getHours() + 1)
     const newDateTime = new Date(formatApptDate(dateSelected) + "T" + hour)
+    const newEndTime = new Date(formatApptDate(dateSelected) + "T" + endTime)
     return (
         <FormItem
           key={hour}
@@ -41,7 +42,7 @@ const TimePicker = ({ dateSelected, formatApptDate, handleTimeSelect, hasError }
           onChange={handleTimeSelect}
           label={newDateTime.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'})}
           otherInputOptions={{disabled:  today > newDateTime}}
-          altFormClass={+dateSelected === +newDateTime ? ' timeOption selectedTime': 'timeOption'}
+          altFormClass={+dateSelected === +newDateTime || (+newDateTime < +newEndTime && +newDateTime > +dateSelected) ? ' timeOption selectedTime': 'timeOption'}
         />
     );
   });

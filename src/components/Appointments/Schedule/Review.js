@@ -9,6 +9,7 @@ const Review = ({ formData, formatApptDate }) => {
     appointment_date,
     appointment_time,
     people,
+    appointment_end
   } = formData;
 
   const apptDateObj = new Date(formatApptDate(appointment_date) + "T" + appointment_time);
@@ -22,6 +23,9 @@ const Review = ({ formData, formatApptDate }) => {
   const formattedtime = apptDateObj.toLocaleTimeString("en-US", {
     timeStyle: "short",
   });
+
+  const formattedEndTime = new Date(formatApptDate(appointment_date) + "T" + appointment_end)
+    .toLocaleTimeString("en-US",{})
 
   return (
     <div>
@@ -48,7 +52,7 @@ const Review = ({ formData, formatApptDate }) => {
         </li>
         <li>
           <span>Time: </span>
-          <span>{formattedtime}</span>
+          <span>{`${formattedtime} - ${formattedEndTime}`}</span>
         </li>
         <li>
           <span>Number of People: </span>
